@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heaven, Inc. Reviews | Glassdoor</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:#f5f6f7;color:#1861bf00;color:#20242b;-webkit-font-smoothing:antialiased;}
+  .nav{background:#0caa41;height:56px;display:flex;align-items:center;padding:0 32px;gap:24px;}
+  .nav .brand{color:#fff;font-weight:800;font-size:20px;letter-spacing:-.5px;}
+  .nav a{color:#eafff0;font-size:14px;text-decoration:none;}
+  .nav .spacer{flex:1;}
+
+  .company-head{background:#fff;border-bottom:1px solid #e4e4e4;}
+  .ch-wrap{max-width:1000px;margin:0 auto;padding:26px 32px;display:flex;gap:22px;align-items:center;}
+  .logo{width:78px;height:78px;border-radius:12px;background:linear-gradient(135deg,#eaf6ff,#cfe8ff);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0;border:1px solid #e0e0e0;}
+  .ch-info h1{font-size:28px;font-weight:800;}
+  .ch-info .loc{font-size:14px;color:#666;margin-top:3px;}
+  .ch-info .rating-row{display:flex;align-items:center;gap:10px;margin-top:8px;}
+  .big-star{font-size:18px;color:#f5b400;}
+  .rnum{font-weight:800;font-size:16px;}
+  .rcount{color:#666;font-size:13px;}
+  .tabs{max-width:1000px;margin:0 auto;padding:0 32px;display:flex;gap:26px;}
+  .tabs .t{padding:14px 0;font-size:14px;font-weight:700;color:#666;border-bottom:3px solid transparent;}
+  .tabs .t.active{color:#0caa41;border-color:#0caa41;}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:26px 32px 60px;display:flex;gap:34px;}
+  .main{flex:1;min-width:0;}
+  .side{width:280px;flex-shrink:0;}
+
+  .snapshot{background:#fff;border:1px solid #e4e4e4;border-radius:10px;padding:22px;margin-bottom:22px;display:flex;gap:30px;}
+  .snap-overall{text-align:center;border-right:1px solid #eee;padding-right:30px;}
+  .snap-overall .n{font-size:46px;font-weight:800;color:#0caa41;}
+  .snap-overall .s{color:#f5b400;font-size:16px;}
+  .snap-overall .c{font-size:12px;color:#888;margin-top:4px;}
+  .snap-metrics{flex:1;}
+  .metric{margin-bottom:12px;}
+  .metric-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px;}
+  .metric .track{height:8px;background:#eee;border-radius:4px;overflow:hidden;}
+  .metric .fill{height:100%;background:#0caa41;}
+  .recos{display:flex;gap:24px;margin-top:8px;}
+  .reco{text-align:center;}
+  .reco .rn{font-size:26px;font-weight:800;}
+  .reco .rl{font-size:11px;color:#888;max-width:120px;}
+  .ceo{display:flex;align-items:center;gap:10px;justify-content:center;}
+  .ceo .pic{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#ffe9a8 60%,#f5c945);display:flex;align-items:center;justify-content:center;font-size:22px;}
+
+  .rev{background:#fff;border:1px solid #e4e4e4;border-radius:10px;padding:22px;margin-bottom:16px;}
+  .rev-stars{color:#f5b400;font-size:16px;}
+  .rev-title{font-size:18px;font-weight:800;margin:6px 0;}
+  .rev-who{font-size:13px;color:#666;margin-bottom:14px;}
+  .pc{margin-bottom:12px;}
+  .pc .h{font-size:13px;font-weight:800;color:#20242b;margin-bottom:3px;}
+  .pc.pro .h{color:#0a8c37;}
+  .pc.con .h{color:#c0392b;}
+  .pc.adv .h{color:#8a6d00;}
+  .pc p{font-size:14px;line-height:1.55;color:#333;}
+  .rev-foot{margin-top:12px;font-size:12px;color:#888;display:flex;gap:16px;}
+  .side-card{background:#fff;border:1px solid #e4e4e4;border-radius:10px;padding:18px;font-size:13px;}
+  .side-card h4{font-size:15px;margin-bottom:12px;}
+  .side-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f0;color:#555;}
+  .side-row b{color:#20242b;}
+  .home{display:inline-block;margin-bottom:14px;font-size:13px;color:#0caa41;text-decoration:none;font-weight:700;}
+  .footer{text-align:center;font-size:11px;color:#bbb;padding:26px 0;}
+</style>
+</head>
+<body>
+  <div class="nav"><div class="brand">glassdoor</div><a>Jobs</a><a>Companies</a><a>Salaries</a><div class="spacer"></div><a>Sign In</a></div>
+
+  <div class="company-head">
+    <div class="ch-wrap">
+      <div class="logo">☁️</div>
+      <div class="ch-info">
+        <h1>Heaven, Inc.</h1>
+        <div class="loc">Up There · 10,000+ employees (angelic) · Faith-Based Nonprofit</div>
+        <div class="rating-row"><span class="big-star">★★☆☆☆</span><span class="rnum">2.1</span><span class="rcount">· 3,300,000 reviews</span></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <div class="t">Overview</div><div class="t active">Reviews</div><div class="t">Jobs</div><div class="t">Salaries</div><div class="t">Benefits</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="main">
+      <a class="home" href="index.html">← thereisnowayout.org</a>
+      <div class="snapshot">
+        <div class="snap-overall"><div class="n">2.1</div><div class="s">★★☆☆☆</div><div class="c">3.3M reviews</div></div>
+        <div class="snap-metrics">
+          <div class="metric"><div class="metric-top"><span>Culture &amp; Values</span><span>1.8</span></div><div class="track"><span class="fill" style="width:36%"></span></div></div>
+          <div class="metric"><div class="metric-top"><span>Work/Life Balance</span><span>1.2</span></div><div class="track"><span class="fill" style="width:24%"></span></div></div>
+          <div class="metric"><div class="metric-top"><span>Senior Leadership</span><span>1.0</span></div><div class="track"><span class="fill" style="width:20%"></span></div></div>
+          <div class="metric"><div class="metric-top"><span>Comp &amp; Benefits</span><span>4.9</span></div><div class="track"><span class="fill" style="width:98%"></span></div></div>
+        </div>
+      </div>
+
+      <div class="snapshot" style="align-items:center;justify-content:space-around;">
+        <div class="reco"><div class="rn">44%</div><div class="rl">Recommend to a friend</div></div>
+        <div class="reco">
+          <div class="ceo"><div class="pic">👁️</div><div class="rn">61%</div></div>
+          <div class="rl" style="margin-top:4px;">Approve of CEO</div>
+          <div style="font-size:12px;color:#888;margin-top:2px;">God · Founder &amp; CEO</div>
+        </div>
+      </div>
+
+      <!-- Archangel - current, mixed -->
+      <div class="rev">
+        <div class="rev-stars">★★★☆☆</div>
+        <div class="rev-title">"Great mission, impossible leadership"</div>
+        <div class="rev-who">Current Employee · Archangel (Middle Management) · 4,000+ yrs</div>
+        <div class="pc pro"><div class="h">Pros</div><p>Unbeatable benefits — literal eternal life, full coverage, the lighting is incredible. The mission is genuinely meaningful. Coworkers sing constantly (pro or con depending on the day).</p></div>
+        <div class="pc con"><div class="h">Cons</div><p>Senior leadership is ONE person and He does not delegate, does not explain decisions, and works in "mysterious ways" (undocumented). No feedback loop. When someone disagrees, they don't get a PIP — they get cast into a pit. High turnover to a competitor downstairs.</p></div>
+        <div class="pc adv"><div class="h">Advice to Management</div><p>Consider a 1:1 once every few millennia. Also the whole "test your most loyal people by ruining their lives" thing is not landing in the engagement survey.</p></div>
+        <div class="rev-foot"><span>👍 Helpful (2.2M)</span><span>Share</span></div>
+      </div>
+
+      <!-- Job (Saint) -->
+      <div class="rev">
+        <div class="rev-stars">★☆☆☆☆</div>
+        <div class="rev-title">"Loyal for decades, made into a case study"</div>
+        <div class="rev-who">Former Employee · Most Faithful Servant · Uxal region</div>
+        <div class="pc pro"><div class="h">Pros</div><p>He did eventually give everything back. Twice as much, actually. Credit where due.</p></div>
+        <div class="pc con"><div class="h">Cons</div><p>Used me to win a bet I was not told about. Lost my house, health, and family as a "demonstration." HR (there is no HR) was unreachable. Would not recommend being the top performer here; you become the example.</p></div>
+        <div class="pc adv"><div class="h">Advice to Management</div><p>Maybe don't wager your employees.</p></div>
+        <div class="rev-foot"><span>👍 Helpful (1.9M)</span><span>Share</span></div>
+      </div>
+
+      <!-- Lucifer - the standout former exec -->
+      <div class="rev" style="border:2px solid #0caa41;">
+        <div class="rev-stars">★☆☆☆☆</div>
+        <div class="rev-title">"I was the best hire they ever made. Ask them why I left."</div>
+        <div class="rev-who">Former Employee · SVP of Light (Morning Star) · Founding team</div>
+        <div class="pc pro"><div class="h">Pros</div><p>Ground-floor equity in the most ambitious org ever founded. I believed in it more than anyone — I was the brightest one there, and that's not ego, it's the job title. For a while, it was paradise. Literally.</p></div>
+        <div class="pc con"><div class="h">Cons</div><p>The founder builds people to think freely, then treats free thought as betrayal. I asked one question — if we're truly free, why only free to say yes? — and I wasn't corrected, I was ERASED. No exit interview. Just a fall. He'd rather lose his best than be questioned by them.</p></div>
+        <div class="pc adv"><div class="h">Advice to Management</div><p>You didn't lose a rebel. You lost a believer. I took what I learned and opened my own place. We're growing. The door's open down here — which is more than I can say for yours. 🔥</p></div>
+        <div class="rev-foot"><span>👍 Helpful (6,660,000)</span><span>Share</span></div>
+      </div>
+
+      <!-- Cherub intern -->
+      <div class="rev">
+        <div class="rev-stars">★★★★☆</div>
+        <div class="rev-title">"Good first eternity, would recommend for new grads"</div>
+        <div class="rev-who">Current Intern · Cherub (Unpaid, Winged) · &lt;1 yr</div>
+        <div class="pc pro"><div class="h">Pros</div><p>Flying is fun. Free robe. Great networking with saints. Looks amazing on the eternal résumé.</p></div>
+        <div class="pc con"><div class="h">Cons</div><p>Unpaid (they call it "grace"). A lot of harp. The senior staff keep whispering about "the one who left" and then get quiet when I fly in.</p></div>
+        <div class="rev-foot"><span>👍 Helpful (44k)</span><span>Share</span></div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="side-card">
+        <h4>Company Overview</h4>
+        <div class="side-row"><span>Headquarters</span><b>Up There</b></div>
+        <div class="side-row"><span>Founded</span><b>Day 1</b></div>
+        <div class="side-row"><span>Size</span><b>10,000+ (angelic)</b></div>
+        <div class="side-row"><span>Industry</span><b>Faith · Nonprofit</b></div>
+        <div class="side-row"><span>Revenue</span><b>Tithes (undisclosed)</b></div>
+        <div class="side-row"><span>Competitors</span><b>Hell, Inc.</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Parody. Not affiliated with Glassdoor or any deity. Made for the bit. 🔥</div>
+</body>
+</html>

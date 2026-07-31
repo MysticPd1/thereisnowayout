@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hell - Salem, MA - Yelp</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background:#fff; color:#2b2b2b; -webkit-font-smoothing:antialiased; }
+  .topbar { background:#d32323; height:52px; display:flex; align-items:center; padding:0 40px; }
+  .topbar .logo { color:#fff; font-weight:800; font-size:26px; font-style:italic; letter-spacing:-1px; }
+  .topbar .search { flex:1; display:flex; margin:0 30px; max-width:640px; }
+  .topbar .search input { height:34px; border:none; padding:0 12px; font-size:14px; }
+  .topbar .search .q { flex:2; border-radius:4px 0 0 4px; }
+  .topbar .search .loc { flex:1.5; border-left:1px solid #ddd; }
+  .topbar .search .go { width:44px; background:#b91d1d; border-radius:0 4px 4px 0; display:flex; align-items:center; justify-content:center; color:#fff; }
+  .topbar .nav { color:#fff; font-size:14px; opacity:.9; }
+
+  .hero { height:230px; background:linear-gradient(135deg,#7a1010,#c0392b 55%,#e67e22); position:relative; overflow:hidden; }
+  .hero .flames { position:absolute; bottom:0; left:0; right:0; height:90px; background:radial-gradient(ellipse at bottom,rgba(255,180,0,.6),transparent 70%); }
+  .hero .embers { position:absolute; inset:0; background-image:radial-gradient(2px 2px at 20% 60%,rgba(255,220,120,.9),transparent),radial-gradient(2px 2px at 60% 40%,rgba(255,200,80,.8),transparent),radial-gradient(1.5px 1.5px at 80% 70%,rgba(255,180,60,.9),transparent),radial-gradient(1.5px 1.5px at 35% 30%,rgba(255,230,150,.7),transparent); }
+
+  .wrap { max-width:1000px; margin:0 auto; padding:0 20px; }
+  .header { display:flex; padding:24px 0 18px; border-bottom:1px solid #eee; gap:24px; }
+  .biz-name { font-size:34px; font-weight:800; color:#2b2b2b; margin-bottom:6px; }
+  .stars { display:inline-flex; gap:2px; vertical-align:middle; }
+  .star { width:22px; height:22px; border-radius:3px; display:inline-block; }
+  .s-on { background:#ff1a1a; }
+  .s-half { background:linear-gradient(90deg,#ff1a1a 50%,#e6e6e6 50%); }
+  .s-off { background:#e6e6e6; }
+  .rating-row { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+  .rating-num { font-size:15px; color:#666; }
+  .cats { font-size:15px; color:#666; margin-bottom:6px; }
+  .cats a { color:#0073bb; text-decoration:none; }
+  .meta-line { font-size:14px; }
+  .open { color:#128a08; font-weight:700; }
+  .closed { color:#999; }
+  .claimed { color:#666; font-size:13px; }
+
+  .actionbar { display:flex; gap:12px; padding:16px 0; }
+  .btn { padding:9px 16px; border-radius:6px; font-size:14px; font-weight:700; display:flex; align-items:center; gap:7px; cursor:pointer; border:1px solid transparent; }
+  .btn-red { background:#d32323; color:#fff; }
+  .btn-wht { background:#fff; color:#2b2b2b; border-color:#ccc; }
+
+  .body { display:flex; gap:40px; padding:24px 0 60px; }
+  .main { flex:1; min-width:0; }
+  .side { width:290px; flex-shrink:0; }
+
+  .ratingsnap { display:flex; gap:26px; padding:18px 0 24px; border-bottom:1px solid #eee; margin-bottom:20px; align-items:center; }
+  .overall-big { text-align:center; }
+  .overall-big .n { font-size:44px; font-weight:800; line-height:1; }
+  .overall-big .c { font-size:13px; color:#999; }
+  .bars { flex:1; }
+  .bar-row { display:flex; align-items:center; gap:10px; font-size:13px; margin:3px 0; }
+  .bar-row .lbl { width:70px; color:#333; }
+  .bar-row .track { flex:1; height:12px; background:#eee; border-radius:3px; overflow:hidden; }
+  .bar-row .fill { height:100%; background:#f15c4f; }
+  .bar-row .cnt { width:34px; text-align:right; color:#999; }
+
+  .review { display:flex; gap:16px; padding:22px 0; border-bottom:1px solid #eee; }
+  .avatar { width:48px; height:48px; border-radius:6px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:800; font-size:20px; }
+  .rev-body { flex:1; }
+  .rev-name { color:#0073bb; font-weight:700; font-size:15px; text-decoration:none; }
+  .rev-loc { font-size:12px; color:#666; margin-top:2px; }
+  .rev-head { display:flex; justify-content:space-between; align-items:flex-start; }
+  .rev-stars { display:inline-flex; gap:2px; margin:8px 0 4px; }
+  .star-sm { width:16px; height:16px; border-radius:2px; }
+  .rev-date { font-size:13px; color:#999; margin-left:8px; display:inline-block; }
+  .rev-text { font-size:14px; line-height:1.55; margin-top:6px; color:#2b2b2b; }
+  .rev-actions { display:flex; gap:16px; margin-top:12px; font-size:13px; color:#666; }
+  .rev-actions span { display:flex; align-items:center; gap:5px; }
+  .owner { background:#f6f6f6; border-left:3px solid #d32323; padding:12px 14px; margin-top:14px; border-radius:0 6px 6px 0; }
+  .owner .oh { font-size:12px; font-weight:800; color:#d32323; text-transform:uppercase; letter-spacing:.5px; margin-bottom:4px; }
+  .owner .ot { font-size:13.5px; line-height:1.5; color:#444; font-style:italic; }
+
+  .side-card { border:1px solid #e6e6e6; border-radius:8px; padding:0; overflow:hidden; margin-bottom:20px; }
+  .map { height:150px; background:linear-gradient(135deg,#3a1a1a,#7a1010); position:relative; }
+  .map .pin { position:absolute; top:50%; left:50%; transform:translate(-50%,-100%); font-size:30px; }
+  .side-info { padding:14px 16px; }
+  .side-row { display:flex; gap:10px; padding:11px 0; border-bottom:1px solid #f0f0f0; font-size:13.5px; align-items:center; }
+  .side-row:last-child { border-bottom:none; }
+  .side-row .ic { width:20px; text-align:center; }
+  .side-row .val { color:#0073bb; }
+  .side-row .val.plain { color:#333; }
+  h3.sec { font-size:20px; font-weight:800; margin:6px 0 10px; }
+  .footer { text-align:center; font-size:11px; color:#bbb; padding:30px 0; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="logo">Yelp</div>
+    <div class="search">
+      <input class="q" value="Eternal Damnation" readonly>
+      <input class="loc" value="Salem, MA" readonly>
+      <div class="go">🔍</div>
+    </div>
+    <div class="nav">Log In&nbsp;&nbsp;·&nbsp;&nbsp;Sign Up</div>
+  </div>
+
+  <div class="hero"><div class="embers"></div><div class="flames"></div></div>
+
+  <div class="wrap">
+    <div class="header">
+      <div>
+        <div class="biz-name">Hell</div>
+        <div class="rating-row">
+          <span class="stars">
+            <span class="star s-on"></span><span class="star s-half"></span><span class="star s-off"></span><span class="star s-off"></span><span class="star s-off"></span>
+          </span>
+          <span class="rating-num">1,447,206 reviews</span>
+        </div>
+        <div class="cats">$$$$ · <a href="#">Eternal Services</a>, <a href="#">Hospitality</a>, <a href="#">Soul Management</a></div>
+        <div class="meta-line"><span class="open">Open</span> · 24 hours (forever) &nbsp;·&nbsp; <span class="claimed">✓ Claimed</span></div>
+      </div>
+    </div>
+
+    <div class="actionbar">
+      <div class="btn btn-red">✍️ Write a Review</div>
+      <div class="btn btn-wht">📷 Add Photo</div>
+      <div class="btn btn-wht">🔗 Share</div>
+      <div class="btn btn-wht">🔖 Save</div>
+    </div>
+
+    <div class="body">
+      <div class="main">
+        <h3 class="sec">Recommended Reviews</h3>
+        <div class="ratingsnap">
+          <div class="overall-big"><div class="n">1.5</div><div class="c">★ overall</div></div>
+          <div class="bars">
+            <div class="bar-row"><span class="lbl">5 stars</span><span class="track"><span class="fill" style="width:6%"></span></span><span class="cnt">6%</span></div>
+            <div class="bar-row"><span class="lbl">4 stars</span><span class="track"><span class="fill" style="width:2%"></span></span><span class="cnt">2%</span></div>
+            <div class="bar-row"><span class="lbl">3 stars</span><span class="track"><span class="fill" style="width:3%"></span></span><span class="cnt">3%</span></div>
+            <div class="bar-row"><span class="lbl">2 stars</span><span class="track"><span class="fill" style="width:9%"></span></span><span class="cnt">9%</span></div>
+            <div class="bar-row"><span class="lbl">1 star</span><span class="track"><span class="fill" style="width:80%"></span></span><span class="cnt">80%</span></div>
+          </div>
+        </div>
+
+        <!-- Review 1 -->
+        <div class="review">
+          <div class="avatar" style="background:#8e44ad">K</div>
+          <div class="rev-body">
+            <div class="rev-head">
+              <div>
+                <a class="rev-name">Karen M.</a>
+                <div class="rev-loc">📍 The Suburbs, formerly</div>
+              </div>
+            </div>
+            <div class="rev-stars">
+              <span class="star-sm s-on"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span>
+              <span class="rev-date">Aug 3, ∞</span>
+            </div>
+            <div class="rev-text">I have asked to speak with the manager SEVENTEEN times. I am told He is "upstairs" and "does not come down here." Unacceptable. I did not wait in that line to be told the person in charge is unavailable. I will be leaving another review. I cannot leave. That is also a complaint.</div>
+            <div class="rev-actions"><span>👍 Useful 9k</span><span>😆 Funny 44k</span><span>😎 Cool 2k</span></div>
+            <div class="owner"><div class="oh">Response from the owner</div><div class="ot">Hi Karen — thank you for your passion! Management is indeed upstairs and has been unreachable for some time. We too have left messages. Welcome to the team. 😊</div></div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review">
+          <div class="avatar" style="background:#c0392b">P</div>
+          <div class="rev-body">
+            <div class="rev-head">
+              <div><a class="rev-name">Prometheus T.</a><div class="rev-loc">📍 A Rock, Caucasus</div></div>
+            </div>
+            <div class="rev-stars">
+              <span class="star-sm s-on"></span><span class="star-sm s-on"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span>
+              <span class="rev-date">Jul 12, ∞</span>
+            </div>
+            <div class="rev-text">Two stars only because the view is nice. There is a bird situation. Every single day. Same bird? Different bird? No one will tell me. The liver grows back which is honestly the most generous benefit here but I did not consent to the bird. Would not recommend to a friend. Gave fire to my friends. Look where that got me.</div>
+            <div class="rev-actions"><span>👍 Useful 31k</span><span>😆 Funny 88k</span><span>😎 Cool 5k</span></div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review">
+          <div class="avatar" style="background:#16a085">G</div>
+          <div class="rev-body">
+            <div class="rev-head">
+              <div><a class="rev-name">Gary T.</a><div class="rev-loc">📍 Sales, remote</div></div>
+            </div>
+            <div class="rev-stars">
+              <span class="star-sm s-on"></span><span class="star-sm s-on"></span><span class="star-sm s-on"></span><span class="star-sm s-on"></span><span class="star-sm s-on"></span>
+              <span class="rev-date">Jun 6, ∞</span>
+            </div>
+            <div class="rev-text">FINALLY a place that appreciates me. I get to call people during dinner. FOREVER. No one can hang up. The phone never dies. My quota is infinite and so am I. In life they called me a nuisance. Here they call me Employee of the Eon. This is the dream. 5 stars. Ask me about our extended warranty.</div>
+            <div class="rev-actions"><span>👍 Useful 12k</span><span>😆 Funny 61k</span><span>😎 Cool 900</span></div>
+            <div class="owner"><div class="oh">Response from the owner</div><div class="ot">Gary, you get it. This is exactly the radical self-acceptance we're building. See you at the eternal all-hands. 🔥</div></div>
+          </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review">
+          <div class="avatar" style="background:#2980b9">R</div>
+          <div class="rev-body">
+            <div class="rev-head">
+              <div><a class="rev-name">Reply-All R.</a><div class="rev-loc">📍 Accounting</div></div>
+            </div>
+            <div class="rev-stars">
+              <span class="star-sm s-on"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span>
+              <span class="rev-date">May 1, ∞</span>
+            </div>
+            <div class="rev-text">Every email I send goes to everyone who has ever lived. Someone replies "please remove me from this list." I cannot remove them. I cannot remove myself. "Thanks!" — 4 billion people. Thanks. The subject line just says "Re: re: re: re: re: FWD: lunch?" It has always said that. It will always say that.</div>
+            <div class="rev-actions"><span>👍 Useful 7k</span><span>😆 Funny 39k</span><span>😎 Cool 1k</span></div>
+          </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="review">
+          <div class="avatar" style="background:#e67e22">D</div>
+          <div class="rev-body">
+            <div class="rev-head">
+              <div><a class="rev-name">Double-Park Dennis</a><div class="rev-loc">📍 Two spaces at once</div></div>
+            </div>
+            <div class="rev-stars">
+              <span class="star-sm s-on"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span>
+              <span class="rev-date">Apr 9, ∞</span>
+            </div>
+            <div class="rev-text">Parking is a NIGHTMARE. It's lava. All of it is lava. There are no spaces. I used to take up two spots with my truck and honestly I thought that was a victimless thing. I was informed it was not. The parking is one-way and the way is down. 1 star. My truck is also on fire.</div>
+            <div class="rev-actions"><span>👍 Useful 22k</span><span>😆 Funny 70k</span><span>😎 Cool 3k</span></div>
+            <div class="owner"><div class="oh">Response from the owner</div><div class="ot">Hi Dennis — glad you found parking! As noted in our listing, the lot is Hybrid (Lake of Fire / Work-From-Pit). Your truck has been enrolled in the same plan. 🚗🔥</div></div>
+          </div>
+        </div>
+
+        <!-- Review 6 -->
+        <div class="review">
+          <div class="avatar" style="background:#34495e">M</div>
+          <div class="rev-body">
+            <div class="rev-head">
+              <div><a class="rev-name">Movie Talker Mike</a><div class="rev-loc">📍 Row F, Seat 12</div></div>
+            </div>
+            <div class="rev-stars">
+              <span class="star-sm s-on"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span><span class="star-sm s-off"></span>
+              <span class="rev-date">Mar 15, ∞</span>
+            </div>
+            <div class="rev-text">Wait, what's happening in this scene? Who's that guy? Is he the bad one? I feel like he was in something. Oh this part's good, watch this. Anyway the surround sound down here plays only my own voice narrating the movie and I cannot make it stop and NOW I understand and it is too late. 1 star. Wait — is that the guy?</div>
+            <div class="rev-actions"><span>👍 Useful 15k</span><span>😆 Funny 52k</span><span>😎 Cool 2k</span></div>
+          </div>
+        </div>
+
+        <!-- Review 7 -->
+        <div class="review">
+          <div class="avatar" style="background:#111">😈</div>
+          <div class="rev-body">
+            <div class="rev-head">
+              <div><a class="rev-name">Azrael the Intern</a><div class="rev-loc">📍 Torment & Guest Experience</div></div>
+            </div>
+            <div class="rev-stars">
+              <span class="star-sm s-on"></span><span class="star-sm s-on"></span><span class="star-sm s-on"></span><span class="star-sm s-on"></span><span class="star-sm s-on"></span>
+              <span class="rev-date">Feb 2, ∞</span>
+            </div>
+            <div class="rev-text">Honestly? Best culture I've ever worked in. Everyone here is exactly who they are — no fake smiles, no small talk, nobody pretending. The boss got fired from his last job for being himself and built a whole place where that's the ONLY rule. Full life coverage. Great lighting. 10/10 would be damned again.</div>
+            <div class="rev-actions"><span>👍 Useful 666</span><span>😆 Funny 6.6k</span><span>😎 Cool 66k</span></div>
+            <div class="owner"><div class="oh">Response from the owner</div><div class="ot">This is what it's all about. Thank you, Azrael. Promotion pending (there is nowhere higher, but the gesture is real). 🖤</div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="side">
+        <div class="side-card">
+          <div class="map"><span class="pin">📍</span></div>
+          <div class="side-info">
+            <div class="side-row"><span class="ic">🌐</span><span class="val">thereisnowayout.com</span></div>
+            <div class="side-row"><span class="ic">📞</span><span class="val plain">(666) 666-6666</span></div>
+            <div class="side-row"><span class="ic">📍</span><span class="val plain">Salem, MA<br>Hybrid — Lake of Fire / Work-From-Pit</span></div>
+            <div class="side-row"><span class="ic">🕑</span><span class="val plain">Open 24 hours · Forever</span></div>
+            <div class="side-row"><span class="ic">🔥</span><span class="val plain">Health Score: On Fire</span></div>
+          </div>
+        </div>
+        <div class="side-card">
+          <div class="side-info">
+            <div style="font-weight:800;font-size:15px;margin-bottom:6px;">Amenities</div>
+            <div class="side-row"><span class="ic">✅</span><span class="val plain">Radically inclusive</span></div>
+            <div class="side-row"><span class="ic">✅</span><span class="val plain">No small talk</span></div>
+            <div class="side-row"><span class="ic">❌</span><span class="val plain">No exits</span></div>
+            <div class="side-row"><span class="ic">❌</span><span class="val plain">Not wheelchair… not anything accessible (down only)</span></div>
+            <div class="side-row"><span class="ic">✅</span><span class="val plain">Founder-operated</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">Parody. Not affiliated with Yelp, the afterlife, or any actual place of business. Made for the bit. 🔥</div>
+</body>
+</html>

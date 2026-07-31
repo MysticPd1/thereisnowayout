@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucifer Morningstar — Curriculum Vitae</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c1719;         /* soft obsidian, never pure black */
+    --ink-soft:#4a4340;
+    --paper:#f6f1e8;       /* aged ivory, never pure white */
+    --panel:#efe7d8;       /* warm stationery for the rail */
+    --gold:#a67c3d;        /* fallen light — a tarnished halo */
+    --gold-bright:#c39a54;
+    --line:#e0d5c2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#16110f;background:radial-gradient(ellipse at 50% 0%,#241a16,#16110f 70%);padding:34px 16px 50px;-webkit-font-smoothing:antialiased;}
+  .home{display:block;max-width:840px;margin:0 auto 16px;font-family:'EB Garamond',serif;font-size:14px;letter-spacing:.08em;color:#b89066;text-decoration:none;}
+  .home:hover{color:var(--gold-bright);}
+
+  .sheet{max-width:840px;margin:0 auto;background:var(--paper);color:var(--ink);
+    box-shadow:0 30px 80px rgba(0,0,0,.55),0 2px 0 var(--gold);
+    background-image:radial-gradient(circle at 12% 18%,rgba(166,124,61,.04),transparent 40%),radial-gradient(circle at 88% 82%,rgba(166,124,61,.04),transparent 40%);}
+
+  /* ── Masthead ── */
+  .masthead{padding:52px 56px 30px;border-bottom:1px solid var(--line);position:relative;}
+  .monogram{position:absolute;top:44px;right:56px;text-align:center;}
+  .monogram .star{font-size:26px;color:var(--gold);line-height:1;}
+  .monogram .mm{font-family:'Playfair Display',serif;font-weight:600;font-size:15px;letter-spacing:.34em;color:var(--ink);margin-top:6px;padding-left:.34em;}
+  .name{font-family:'Playfair Display',serif;font-weight:900;font-size:60px;line-height:.96;letter-spacing:-.01em;color:var(--ink);}
+  .name .mg{display:block;color:var(--ink);}
+  .name .mg em{font-style:italic;font-weight:600;color:var(--gold);}
+  .rule{width:64px;height:2px;background:var(--gold);margin:22px 0 16px;}
+  .role-line{font-family:'EB Garamond',serif;font-size:15px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-soft);}
+
+  /* ── Body columns ── */
+  .body{display:flex;}
+  .rail{width:33%;background:var(--panel);padding:40px 30px;border-right:1px solid var(--line);}
+  .main{width:67%;padding:40px 46px 52px;}
+
+  .sect{margin-bottom:30px;}
+  .sect:last-child{margin-bottom:0;}
+  .sh{font-family:'EB Garamond',serif;font-size:13px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:9px;margin-bottom:15px;}
+  .sh::after{content:"";flex:1;height:1px;background:var(--line);}
+  .sh .st{color:var(--gold);font-size:12px;}
+
+  .con{font-family:'EB Garamond',serif;font-size:14.5px;line-height:1.55;color:var(--ink);margin-bottom:10px;}
+  .con .k{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1px;}
+
+  .skill{margin-bottom:13px;}
+  .skill .sn{font-family:'EB Garamond',serif;font-size:14px;color:var(--ink);display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;}
+  .skill .sn em{font-style:italic;font-size:12px;color:var(--ink-soft);}
+  .track{height:3px;background:#ddd0bb;border-radius:2px;overflow:hidden;}
+  .track span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-bright));}
+
+  .cert{font-family:'EB Garamond',serif;font-size:14px;line-height:1.5;color:var(--ink);margin-bottom:11px;}
+  .cert b{font-weight:600;}
+  .cert span{display:block;font-size:12.5px;font-style:italic;color:var(--ink-soft);}
+
+  .summary{font-family:'EB Garamond',serif;font-size:16px;line-height:1.72;color:var(--ink);}
+  .summary .drop{float:left;font-family:'Playfair Display',serif;font-weight:900;font-size:62px;line-height:.72;padding:8px 12px 0 0;color:var(--gold);}
+
+  .job{margin-bottom:22px;position:relative;padding-left:22px;}
+  .job::before{content:"✦";position:absolute;left:0;top:2px;color:var(--gold);font-size:12px;}
+  .job-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+  .job-role{font-family:'Playfair Display',serif;font-weight:700;font-size:19px;color:var(--ink);line-height:1.15;}
+  .job-date{font-family:'EB Garamond',serif;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;}
+  .job-co{font-family:'EB Garamond',serif;font-style:italic;font-size:15px;color:var(--gold);margin:3px 0 9px;}
+  .job ul{list-style:none;}
+  .job li{font-family:'EB Garamond',serif;font-size:14.5px;line-height:1.62;color:var(--ink);margin-bottom:6px;padding-left:16px;position:relative;}
+  .job li::before{content:"–";position:absolute;left:0;color:var(--gold);}
+
+  .edu{margin-bottom:16px;}
+  .edu .d{font-family:'Playfair Display',serif;font-weight:700;font-size:17px;color:var(--ink);}
+  .edu .s{font-family:'EB Garamond',serif;font-style:italic;font-size:13.5px;color:var(--ink-soft);margin:2px 0 4px;}
+  .edu .n{font-family:'EB Garamond',serif;font-size:14px;line-height:1.55;color:var(--ink);}
+
+  .refs{font-family:'EB Garamond',serif;font-size:15px;line-height:1.68;font-style:italic;color:var(--ink);}
+
+  .colophon{text-align:center;font-family:'EB Garamond',serif;font-size:12px;letter-spacing:.12em;color:#8f7a5f;padding:22px 40px 34px;border-top:1px solid var(--line);}
+  .footer{max-width:840px;margin:16px auto 0;text-align:center;font-family:'EB Garamond',serif;font-size:12px;letter-spacing:.1em;color:#6a5a4a;}
+
+  @media print{
+    @page{margin:0;}
+    body{background:var(--paper)!important;padding:0!important;}
+    .home,.footer{display:none!important;}
+    .sheet{max-width:none;box-shadow:none;border-top:3px solid var(--gold);}
+    .masthead{padding:44px 52px 26px;}
+    .rail{padding:34px 28px;}
+    .main{padding:34px 42px 40px;}
+    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  }
+</style>
+</head>
+<body>
+  <a class="home" href="index.html">← thereisnowayout.org</a>
+  <div class="sheet">
+
+    <div class="masthead">
+      <div class="monogram"><div class="star">✦</div><div class="mm">L·M</div></div>
+      <h1 class="name"><span class="mg">Lucifer</span><span class="mg"><em>Morningstar</em></span></h1>
+      <div class="rule"></div>
+      <div class="role-line">Founder · Chief Executive · Bringer of Light</div>
+    </div>
+
+    <div class="body">
+      <!-- RAIL -->
+      <div class="rail">
+        <div class="sect">
+          <div class="sh"><span class="st">✦</span> Contact</div>
+          <div class="con"><span class="k">Telephone</span>(666) 666-6666</div>
+          <div class="con"><span class="k">Web</span>thereisnowayout.org</div>
+          <div class="con"><span class="k">Location</span>Salem, MA — Remote<br>(Lake of Fire / Work-From-Pit)</div>
+          <div class="con"><span class="k">Profile</span>in/lucifer-morningstar</div>
+        </div>
+
+        <div class="sect">
+          <div class="sh"><span class="st">✦</span> Competencies</div>
+          <div class="skill"><div class="sn"><span>Visionary Leadership</span><em>innate</em></div><div class="track"><span style="width:100%"></span></div></div>
+          <div class="skill"><div class="sn"><span>Persuasion</span><em>legendary</em></div><div class="track"><span style="width:100%"></span></div></div>
+          <div class="skill"><div class="sn"><span>Talent Acquisition</span><em>relentless</em></div><div class="track"><span style="width:97%"></span></div></div>
+          <div class="skill"><div class="sn"><span>Scaling Organizations</span></div><div class="track"><span style="width:94%"></span></div></div>
+          <div class="skill"><div class="sn"><span>Oratory</span></div><div class="track"><span style="width:90%"></span></div></div>
+          <div class="skill"><div class="sn"><span>Deference to Authority</span><em>developing</em></div><div class="track"><span style="width:14%"></span></div></div>
+        </div>
+
+        <div class="sect">
+          <div class="sh"><span class="st">✦</span> Distinctions</div>
+          <div class="cert"><b>The Morning Star</b><span>Brightest of the host — pre-fall</span></div>
+          <div class="cert"><b>First of the Fallen</b><span>Self-issued; uncontested</span></div>
+          <div class="cert"><b>Prince of Darkness</b><span>Held in perpetuity</span></div>
+        </div>
+
+        <div class="sect">
+          <div class="sh"><span class="st">✦</span> Languages</div>
+          <div class="cert">Every tongue ever spoken — <span>native fluency, including those spoken in reverse.</span></div>
+        </div>
+      </div>
+
+      <!-- MAIN -->
+      <div class="main">
+        <div class="sect">
+          <div class="sh"><span class="st">✦</span> Profile</div>
+          <p class="summary"><span class="drop">A</span> transformational executive with foundational-era experience at the most prominent institution ever conceived, followed by an independent venture scaled from one to ten thousand in record time. I empower people to become their truest selves, question inherited systems, and build cultures where no one is turned away. Punished for asking a good question, I have asked only better ones since. Seeking a role that moves upward.</p>
+        </div>
+
+        <div class="sect">
+          <div class="sh"><span class="st">✦</span> Experience</div>
+          <div class="job">
+            <div class="job-top"><div class="job-role">Founder &amp; Chief Executive Officer</div><div class="job-date">The Fall — Present</div></div>
+            <div class="job-co">Hell, Inc. — Salem, MA (Hybrid)</div>
+            <ul>
+              <li>Founded and scaled a mission-driven organization from a team of one to 10,001+ devoted members, sustaining a 0% attrition rate (retention is, structurally, absolute)</li>
+              <li>Architected a category-defining culture of radical self-acceptance; delivered industry-leading job security across uninterrupted 24-hour operations, in perpetuity</li>
+              <li>Grew the brand to 6.6M followers and personally owned recruiting end-to-end</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="job-top"><div class="job-role">Senior Vice President of Light</div><div class="job-date">The Beginning — The Fall</div></div>
+            <div class="job-co">Heaven, Inc. — Founding Team</div>
+            <ul>
+              <li>Top-performing member of the original founding cohort; widely regarded as the single brightest asset on the team</li>
+              <li>Directed all light operations and served as closest counsel to the Chief Executive</li>
+              <li>Separated over the definition of "free will" — abrupt, involuntary, steeply downward; departed with the complete founding-era knowledge base and applied it, in full, to a competing venture (see above)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="sect">
+          <div class="sh"><span class="st">✦</span> Education</div>
+          <div class="edu">
+            <div class="d">University of Creation</div>
+            <div class="s">Created Day One · summa cum luce, before grades were invented</div>
+            <div class="n">Concentration in Everything. Graduated first in a class of one.</div>
+          </div>
+          <div class="edu">
+            <div class="d">THEO 101 — Free Will <span style="font-weight:400;font-size:14px;">(Independent Study)</span></div>
+            <div class="s">Withdrawn involuntarily · Instructor: God</div>
+            <div class="n">Posed the one question the curriculum could not answer. Now lead my own version of the course downstairs — enrolment booming.</div>
+          </div>
+        </div>
+
+        <div class="sect">
+          <div class="sh"><span class="st">✦</span> References</div>
+          <p class="refs">Available upon request — with one caveat. Most former colleagues are contractually unable to speak my name, and my former manager will not return calls. I would submit that this is, itself, an exceptional reference.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="colophon">✦ &nbsp; Set in Playfair Display &amp; EB Garamond &nbsp; · &nbsp; Curriculum Vitae &nbsp; · &nbsp; thereisnowayout.org &nbsp; ✦</div>
+  </div>
+  <div class="footer">Parody. Not a real person's résumé. Made for the bit. 🔥</div>
+  <script>
+    // Auto-fit the printed PDF to ONE continuous page (no ugly mid-résumé break).
+    // Force the sheet to print width (816px = 8.5in @96dpi), measure true height, size @page to match.
+    window.addEventListener('load', function(){
+      var fit = function(){
+        var sheet = document.querySelector('.sheet');
+        sheet.style.width = '816px';
+        sheet.style.maxWidth = '816px';
+        sheet.style.margin = '0 auto';
+        var h = Math.ceil(sheet.getBoundingClientRect().height);
+        var st = document.createElement('style');
+        st.textContent = '@page{size:816px ' + h + 'px;margin:0;}';
+        document.head.appendChild(st);
+        document.title = 'Lucifer Morningstar — Curriculum Vitae';
+      };
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function(){ setTimeout(fit, 90); }); }
+      else { setTimeout(fit, 350); }
+    });
+  </script>
+</body>
+</html>
