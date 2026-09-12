@@ -16,7 +16,7 @@
   /* === TV STATIC NOISE (canvas behind everything) === */
   #noise{
     position:fixed;inset:0;width:100%;height:100%;
-    opacity:0.06;z-index:1;pointer-events:none;
+    opacity:0.05;z-index:1;pointer-events:none;
     image-rendering:pixelated;
   }
 
@@ -25,7 +25,7 @@
     position:fixed;inset:0;z-index:2;pointer-events:none;
     background:repeating-linear-gradient(
       0deg,transparent,transparent 2px,
-      rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 4px
+      rgba(0,0,0,0.15) 2px,rgba(0,0,0,0.15) 4px
     );
   }
 
@@ -33,7 +33,7 @@
   .tracking{
     position:fixed;left:0;right:0;height:6px;
     background:linear-gradient(180deg,transparent,rgba(255,255,255,0.04),transparent);
-    z-index:2;pointer-events:none;
+    z-index:6;pointer-events:none;
     animation:trackSlide 8s linear infinite;
   }
   @keyframes trackSlide{
@@ -45,13 +45,13 @@
   .vignette{
     position:fixed;inset:0;z-index:3;pointer-events:none;
     background:radial-gradient(ellipse at center,
-      transparent 40%,rgba(0,0,0,0.55) 75%,rgba(0,0,0,0.95) 100%
+      transparent 30%,rgba(0,0,0,0.5) 65%,rgba(0,0,0,0.95) 100%
     );
   }
 
   /* === SCREEN FLICKER === */
   .flicker{
-    position:fixed;inset:0;z-index:4;pointer-events:none;
+    position:fixed;inset:0;z-index:7;pointer-events:none;
     animation:flicker 6s infinite;
   }
   @keyframes flicker{
@@ -67,49 +67,21 @@
     height:100vh;padding:20px;
   }
 
-  /* === EYES === */
-  .eyes{
-    display:flex;gap:50px;margin-bottom:55px;
-    opacity:0;animation:fadeIn 2.5s ease-out 0.8s forwards;
+  /* === HERO IMAGE === */
+  .hero-face{
+    width:min(600px, 80vw);
+    max-height:35vh;
+    object-fit:contain;
+    margin-bottom:40px;
+    opacity:0;
+    animation:faceReveal 3s ease-out 0.5s forwards;
+    filter:contrast(1.1) brightness(0.95);
   }
-  .eye{
-    width:130px;height:62px;
-    background:radial-gradient(ellipse at center,#f0f0f0 60%,#ccc 100%);
-    border-radius:50%;position:relative;
-    box-shadow:0 0 50px rgba(255,255,255,0.1),0 0 100px rgba(255,255,255,0.05);
-    overflow:hidden;
-    animation:blink 5s ease-in-out infinite;
-  }
-  .eye:nth-child(2){animation-delay:0.06s;}
-
-  @keyframes blink{
-    0%,94%,100%{transform:scaleY(1)}
-    96%{transform:scaleY(0.04)}
-    98%{transform:scaleY(1)}
-  }
-
-  /* iris + pupil */
-  .iris{
-    width:36px;height:36px;
-    background:radial-gradient(circle at 40% 40%,#555 0%,#222 50%,#000 70%);
-    border-radius:50%;position:absolute;
-    top:50%;left:50%;
-    transform:translate(-50%,-50%);
-    transition:transform 0.08s ease-out;
-  }
-  .iris::after{
-    content:'';position:absolute;
-    width:14px;height:14px;
-    background:#000;border-radius:50%;
-    top:50%;left:50%;transform:translate(-50%,-50%);
-  }
-  /* light reflection */
-  .iris::before{
-    content:'';position:absolute;
-    width:7px;height:7px;
-    background:rgba(255,255,255,0.8);
-    border-radius:50%;
-    top:8px;right:8px;z-index:1;
+  @keyframes faceReveal{
+    0%{opacity:0;filter:contrast(1.1) brightness(0) blur(8px)}
+    40%{opacity:0.6;filter:contrast(1.1) brightness(0.5) blur(2px)}
+    70%{opacity:0.9;filter:contrast(1.1) brightness(0.85) blur(0)}
+    100%{opacity:1;filter:contrast(1.1) brightness(0.95) blur(0)}
   }
 
   /* === TITLE === */
@@ -118,7 +90,7 @@
     font-weight:900;letter-spacing:clamp(4px,1.5vw,12px);
     text-transform:uppercase;text-align:center;
     color:#e8e8e8;position:relative;
-    opacity:0;animation:glitchIn 0.6s ease-out 2.8s forwards;
+    opacity:0;animation:glitchIn 0.6s ease-out 3s forwards;
     margin-bottom:48px;line-height:1.15;
   }
   /* chromatic aberration glitch layers */
@@ -163,7 +135,7 @@
   /* === PROMPT === */
   .prompt{
     text-align:center;
-    opacity:0;animation:fadeIn 1.5s ease-out 4s forwards;
+    opacity:0;animation:fadeIn 1.5s ease-out 4.2s forwards;
   }
   .prompt p{
     font-size:clamp(13px,2.2vw,18px);
@@ -207,11 +179,7 @@
 
   /* === MOBILE === */
   @media(max-width:600px){
-    .eyes{gap:28px;margin-bottom:36px}
-    .eye{width:86px;height:42px}
-    .iris{width:24px;height:24px}
-    .iris::after{width:10px;height:10px}
-    .iris::before{width:5px;height:5px;top:5px;right:5px}
+    .hero-face{max-height:28vh;margin-bottom:28px}
     .title{letter-spacing:3px}
     .choices{gap:28px}
     .choice{padding:10px 22px;letter-spacing:3px}
@@ -227,10 +195,7 @@
   <div class="flicker"></div>
 
   <div class="content" id="content">
-    <div class="eyes" id="eyes">
-      <div class="eye" id="eyeL"><div class="iris" id="irisL"></div></div>
-      <div class="eye" id="eyeR"><div class="iris" id="irisR"></div></div>
-    </div>
+    <img class="hero-face" src="thereisnowayout v1.png" alt="">
     <h1 class="title" data-text="THERE IS NO WAY OUT">THERE IS NO WAY OUT</h1>
     <div class="prompt">
       <p>will you enter?</p>
@@ -267,34 +232,6 @@
     H = cv.height = Math.ceil(window.innerHeight / 4);
   });
 
-  /* === EYE TRACKING === */
-  const eyeL = document.getElementById('eyeL');
-  const eyeR = document.getElementById('eyeR');
-  const irisL = document.getElementById('irisL');
-  const irisR = document.getElementById('irisR');
-
-  function moveIris(eye, iris, mx, my){
-    const r = eye.getBoundingClientRect();
-    const cx = r.left + r.width / 2;
-    const cy = r.top + r.height / 2;
-    const dx = mx - cx, dy = my - cy;
-    const a = Math.atan2(dy, dx);
-    const dist = Math.min(1, Math.sqrt(dx*dx + dy*dy) / 300);
-    const px = Math.cos(a) * r.width * 0.18 * dist;
-    const py = Math.sin(a) * r.height * 0.14 * dist;
-    iris.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`;
-  }
-
-  document.addEventListener('mousemove', e => {
-    moveIris(eyeL, irisL, e.clientX, e.clientY);
-    moveIris(eyeR, irisR, e.clientX, e.clientY);
-  });
-  document.addEventListener('touchmove', e => {
-    const t = e.touches[0];
-    moveIris(eyeL, irisL, t.clientX, t.clientY);
-    moveIris(eyeR, irisR, t.clientX, t.clientY);
-  }, {passive:true});
-
   /* === NO BUTTON — just black. nothing. === */
   const noBtn = document.getElementById('noBtn');
   const blackout = document.getElementById('blackout');
@@ -306,7 +243,6 @@
   /* === YES BUTTON === */
   document.getElementById('yesBtn').addEventListener('click', e => {
     e.preventDefault();
-    /* brief static burst then fade out */
     cv.style.opacity = '0.3';
     cv.style.transition = 'opacity 0.15s';
     setTimeout(() => {
