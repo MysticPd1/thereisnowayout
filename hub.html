@@ -3,189 +3,887 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>thereisnowayout.org</title>
+<title>THERE IS NO WAY OUT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:#0a0708;color:#f3 e9e9;color:#f3e9e9;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-  .bg{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 120%,#c0392b 0%,#5a1410 32%,#180809 62%,#0a0708 100%);z-index:-2;}
-  .embers{position:fixed;inset:0;z-index:-1;background-image:radial-gradient(2px 2px at 15% 80%,rgba(255,190,90,.8),transparent),radial-gradient(2px 2px at 70% 70%,rgba(255,160,60,.7),transparent),radial-gradient(1.5px 1.5px at 40% 90%,rgba(255,220,140,.6),transparent),radial-gradient(1.5px 1.5px at 85% 85%,rgba(255,170,70,.7),transparent),radial-gradient(2px 2px at 55% 75%,rgba(255,200,100,.6),transparent);animation:rise 8s linear infinite;}
-  @keyframes rise{from{background-position:0 0,0 0,0 0,0 0,0 0;}to{background-position:0 -400px,0 -600px,0 -500px,0 -700px,0 -450px;}}
-  .hero{text-align:center;padding:90px 20px 40px;}
-  .crest{font-size:64px;margin-bottom:10px;filter:drop-shadow(0 0 24px rgba(255,120,40,.7));}
-  h1{font-size:60px;font-weight:800;letter-spacing:-1.5px;background:linear-gradient(180deg,#fff,#ffb56b);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .tag{font-size:20px;color:#ffcaa0;font-style:italic;margin-top:8px;letter-spacing:.5px;}
-  .sub{max-width:600px;margin:22px auto 0;color:#d9b8b0;font-size:15px;line-height:1.6;}
-  .grid{max-width:1000px;margin:50px auto 90px;padding:0 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
-  a.card{display:block;background:rgba(28,14,14,.72);border:1px solid rgba(255,120,60,.28);border-radius:14px;padding:26px;text-decoration:none;color:inherit;backdrop-filter:blur(6px);transition:transform .18s,border-color .18s,box-shadow .18s;}
-  a.card:hover{transform:translateY(-4px);border-color:rgba(255,150,80,.7);box-shadow:0 12px 40px rgba(200,60,20,.35);}
-  .card .ico{font-size:34px;margin-bottom:14px;}
-  .card .platform{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#ff9a5a;font-weight:800;margin-bottom:6px;}
-  .card h3{font-size:21px;font-weight:800;margin-bottom:8px;color:#fff;}
-  .card p{font-size:13.5px;color:#c9a89f;line-height:1.5;}
-  .card .stars{margin-top:14px;font-size:14px;color:#ffce54;}
-  .divider{max-width:1000px;margin:20px auto 10px;padding:0 24px;}
-  .divider h2{font-size:36px;font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:6px;}
-  .divider .dsub{text-align:center;font-size:15px;font-style:italic;line-height:1.5;max-width:600px;margin:0 auto;}
+  :root{
+    --purple:#9333EA;
+    --magenta:#EC4899;
+    --blue:#3B82F6;
+    --mint:#6EE7B7;
+    --yellow:#FACC15;
+    --orange:#FB923C;
+    --dark:#0F0A1E;
+    --darker:#0A0714;
+    --white:#F8F5FF;
+    --shadow-purple:#5B21B6;
+    --shadow-magenta:#9D174D;
+    --shadow-blue:#1D4ED8;
+  }
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Fredoka',sans-serif;
+    background:var(--darker);color:var(--white);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
 
-  .divider.chaos h2{background:linear-gradient(180deg,#fff,#d8b4fe);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .divider.chaos .dsub{color:#c9a0e8;}
+  /* ===========================
+     TICKER BAR
+     =========================== */
+  .ticker{
+    background:var(--magenta);padding:8px 0;overflow:hidden;
+    position:relative;z-index:200;
+    border-bottom:3px solid var(--shadow-magenta);
+  }
+  .ticker-inner{
+    display:flex;gap:60px;
+    animation:tickerScroll 25s linear infinite;
+    white-space:nowrap;width:max-content;
+  }
+  .ticker span{
+    font-family:'Press Start 2P',monospace;font-size:10px;
+    letter-spacing:1px;color:var(--dark);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .ticker span::before{content:'★';color:var(--yellow);}
+  @keyframes tickerScroll{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-50%)}
+  }
 
-  .divider.mary h2{background:linear-gradient(180deg,#fff,#f0c27f);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .divider.mary .dsub{color:#d4b08a;}
+  /* ===========================
+     NAV
+     =========================== */
+  .nav{
+    background:var(--dark);
+    border-bottom:4px solid var(--purple);
+    padding:12px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+    position:sticky;top:0;z-index:100;
+  }
+  .nav-brand{
+    font-family:'Bangers',cursive;font-size:clamp(20px,4vw,28px);
+    color:var(--yellow);letter-spacing:2px;
+    text-shadow:3px 3px 0 var(--purple),-1px -1px 0 var(--magenta);
+    transform:rotate(-2deg);
+  }
+  .nav-links{display:flex;gap:6px;list-style:none;flex-wrap:wrap;}
+  .nav-links a{
+    font-family:'Fredoka',sans-serif;font-size:13px;font-weight:600;
+    color:var(--white);text-decoration:none;
+    padding:6px 14px;border-radius:100px;
+    border:2px solid transparent;
+    transition:all 0.2s;
+  }
+  .nav-links a:hover{
+    border-color:var(--mint);color:var(--mint);
+    transform:scale(1.05);
+  }
+  .hamburger{
+    display:none;background:none;border:none;cursor:pointer;
+    width:32px;height:24px;position:relative;z-index:102;
+  }
+  .hamburger span{
+    display:block;width:100%;height:3px;background:var(--yellow);
+    border-radius:3px;position:absolute;left:0;transition:all 0.3s;
+  }
+  .hamburger span:nth-child(1){top:0;}
+  .hamburger span:nth-child(2){top:10px;}
+  .hamburger span:nth-child(3){top:20px;}
+  .hamburger.open span:nth-child(1){transform:rotate(45deg);top:10px;}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:rotate(-45deg);top:10px;}
+  .mobile-menu{
+    display:none;position:fixed;inset:0;z-index:101;
+    background:var(--dark);
+    flex-direction:column;align-items:center;justify-content:center;gap:24px;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{
+    font-family:'Bangers',cursive;font-size:32px;color:var(--yellow);
+    text-decoration:none;letter-spacing:2px;
+    text-shadow:3px 3px 0 var(--purple);
+    transition:transform 0.2s;
+  }
+  .mobile-menu a:hover{transform:scale(1.1) rotate(-3deg);}
 
-  .divider.enoch h2{background:linear-gradient(180deg,#fff,#d4b896);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .divider.enoch .dsub{color:#c9b299;}
+  /* ===========================
+     HERO
+     =========================== */
+  .hero{
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:60px 20px;position:relative;overflow:hidden;
+    background:
+      radial-gradient(circle at 20% 30%,rgba(147,51,234,0.4),transparent 50%),
+      radial-gradient(circle at 80% 70%,rgba(236,72,153,0.3),transparent 50%),
+      radial-gradient(circle at 50% 50%,rgba(59,130,246,0.2),transparent 60%),
+      var(--darker);
+  }
+  /* retro grid floor */
+  .hero::before{
+    content:'';position:absolute;bottom:0;left:-10%;right:-10%;height:45%;
+    background:
+      linear-gradient(transparent 0%,rgba(147,51,234,0.15) 100%),
+      repeating-linear-gradient(90deg,rgba(147,51,234,0.2) 0px,rgba(147,51,234,0.2) 1px,transparent 1px,transparent 60px),
+      repeating-linear-gradient(0deg,rgba(147,51,234,0.15) 0px,rgba(147,51,234,0.15) 1px,transparent 1px,transparent 60px);
+    transform:perspective(400px) rotateX(45deg);
+    transform-origin:bottom center;
+  }
+  /* floating decorative stars */
+  .star{
+    position:absolute;font-size:32px;
+    animation:spinFloat 6s ease-in-out infinite;
+    pointer-events:none;opacity:0.7;z-index:1;
+  }
+  .star:nth-child(1){top:12%;left:8%;animation-delay:0s;font-size:28px;color:var(--yellow);}
+  .star:nth-child(2){top:20%;right:12%;animation-delay:-1.5s;font-size:36px;color:var(--mint);}
+  .star:nth-child(3){bottom:25%;left:15%;animation-delay:-3s;font-size:24px;color:var(--magenta);}
+  .star:nth-child(4){top:35%;right:6%;animation-delay:-4s;font-size:20px;color:var(--blue);}
+  .star:nth-child(5){bottom:35%;right:18%;animation-delay:-2s;font-size:30px;color:var(--orange);}
+  @keyframes spinFloat{
+    0%,100%{transform:rotate(0deg) translateY(0)}
+    25%{transform:rotate(90deg) translateY(-12px)}
+    50%{transform:rotate(180deg) translateY(0)}
+    75%{transform:rotate(270deg) translateY(12px)}
+  }
+  .hero-content{position:relative;z-index:2;max-width:800px;}
+  .hero-badge{
+    display:inline-block;
+    font-family:'Press Start 2P',monospace;font-size:10px;
+    color:var(--dark);background:var(--yellow);
+    padding:6px 16px;border-radius:4px;
+    border:3px solid #CA8A04;
+    transform:rotate(-3deg);margin-bottom:24px;
+    box-shadow:4px 4px 0 #CA8A04;
+  }
+  .hero h1{
+    font-family:'Bangers',cursive;
+    font-size:clamp(48px,12vw,120px);
+    line-height:0.95;letter-spacing:3px;
+    color:var(--white);
+    text-shadow:
+      4px 4px 0 var(--purple),
+      8px 8px 0 var(--shadow-purple),
+      -2px -2px 0 var(--magenta);
+    margin-bottom:20px;
+    transform:rotate(-1deg);
+  }
+  .hero-sub{
+    font-size:clamp(16px,2.5vw,22px);font-weight:500;
+    line-height:1.6;color:rgba(248,245,255,0.8);
+    max-width:580px;margin:0 auto 36px;
+  }
+  .hero-cta{
+    display:inline-block;
+    font-family:'Bangers',cursive;font-size:clamp(20px,3vw,28px);
+    letter-spacing:2px;
+    color:var(--dark);background:var(--mint);
+    padding:14px 36px;border-radius:12px;
+    border:4px solid #059669;
+    box-shadow:6px 6px 0 #059669;
+    text-decoration:none;cursor:pointer;
+    transition:all 0.15s;
+    transform:rotate(1deg);
+  }
+  .hero-cta:hover{
+    transform:rotate(-1deg) translateY(-3px);
+    box-shadow:8px 10px 0 #059669;
+  }
+  .hero-cta:active{
+    transform:rotate(0) translateY(2px);
+    box-shadow:2px 2px 0 #059669;
+  }
 
-  a.card.chaos{border-color:rgba(168,85,247,.28);}
-  a.card.chaos:hover{border-color:rgba(168,85,247,.7);box-shadow:0 12px 40px rgba(120,50,200,.3);}
-  a.card.chaos .platform{color:#c084fc;}
-  a.card.chaos .stars{color:#d8b4fe;}
+  /* ===========================
+     SECTION DIVIDERS — zigzag
+     =========================== */
+  .zigzag{
+    height:24px;width:100%;
+    background:
+      linear-gradient(135deg,var(--purple) 25%,transparent 25%) -20px 0,
+      linear-gradient(225deg,var(--purple) 25%,transparent 25%) -20px 0,
+      linear-gradient(315deg,var(--purple) 25%,transparent 25%),
+      linear-gradient(45deg,var(--purple) 25%,transparent 25%);
+    background-size:40px 24px;
+    background-color:transparent;
+  }
+  .zigzag.magenta{
+    background:
+      linear-gradient(135deg,var(--magenta) 25%,transparent 25%) -20px 0,
+      linear-gradient(225deg,var(--magenta) 25%,transparent 25%) -20px 0,
+      linear-gradient(315deg,var(--magenta) 25%,transparent 25%),
+      linear-gradient(45deg,var(--magenta) 25%,transparent 25%);
+    background-size:40px 24px;
+  }
+  .zigzag.blue{
+    background:
+      linear-gradient(135deg,var(--blue) 25%,transparent 25%) -20px 0,
+      linear-gradient(225deg,var(--blue) 25%,transparent 25%) -20px 0,
+      linear-gradient(315deg,var(--blue) 25%,transparent 25%),
+      linear-gradient(45deg,var(--blue) 25%,transparent 25%);
+    background-size:40px 24px;
+  }
+  .zigzag.mint{
+    background:
+      linear-gradient(135deg,var(--mint) 25%,transparent 25%) -20px 0,
+      linear-gradient(225deg,var(--mint) 25%,transparent 25%) -20px 0,
+      linear-gradient(315deg,var(--mint) 25%,transparent 25%),
+      linear-gradient(45deg,var(--mint) 25%,transparent 25%);
+    background-size:40px 24px;
+  }
 
-  a.card.mary{border-color:rgba(192,112,58,.28);}
-  a.card.mary:hover{border-color:rgba(192,112,58,.7);box-shadow:0 12px 40px rgba(160,90,30,.3);}
-  a.card.mary .platform{color:#e8a96a;}
-  a.card.mary .stars{color:#f0c27f;}
+  /* ===========================
+     SECTIONS
+     =========================== */
+  section{padding:80px 20px;position:relative;}
+  .section-inner{max-width:1100px;margin:0 auto;}
+  .section-label{
+    font-family:'Press Start 2P',monospace;font-size:clamp(9px,1.5vw,12px);
+    letter-spacing:2px;text-transform:uppercase;
+    color:var(--yellow);margin-bottom:12px;
+  }
+  .section-title{
+    font-family:'Bangers',cursive;
+    font-size:clamp(36px,7vw,64px);
+    line-height:1.1;letter-spacing:2px;margin-bottom:16px;
+  }
+  .section-desc{
+    font-size:clamp(15px,2vw,18px);font-weight:500;
+    line-height:1.7;color:rgba(248,245,255,0.7);
+    max-width:600px;margin-bottom:40px;
+  }
 
-  a.card.enoch{border-color:rgba(139,111,78,.28);}
-  a.card.enoch:hover{border-color:rgba(139,111,78,.7);box-shadow:0 12px 40px rgba(120,90,50,.3);}
-  a.card.enoch .platform{color:#c9a87a;}
-  a.card.enoch .stars{color:#d4b896;}
+  /* ===========================
+     MISSION
+     =========================== */
+  .mission{
+    background:var(--purple);
+    padding:80px 20px;text-align:center;
+    position:relative;
+  }
+  /* dot pattern overlay */
+  .mission::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(rgba(0,0,0,0.15) 1px,transparent 1px);
+    background-size:8px 8px;
+    pointer-events:none;
+  }
+  .mission-inner{max-width:800px;margin:0 auto;position:relative;}
+  .mission-quote{
+    font-family:'Bangers',cursive;
+    font-size:clamp(24px,5vw,48px);
+    line-height:1.3;letter-spacing:1px;
+    color:var(--yellow);
+    text-shadow:3px 3px 0 var(--shadow-purple);
+    margin-bottom:24px;
+  }
+  .mission-body{
+    font-size:clamp(15px,2vw,18px);font-weight:500;
+    line-height:1.8;color:rgba(255,255,255,0.9);
+  }
+  .mission-body b{color:var(--yellow);font-weight:700;}
 
-  .footer{text-align:center;padding:30px 20px 50px;color:#7a5a52;font-size:12px;}
-  .footer b{color:#b98a7f;}
+  /* ===========================
+     CARDS — chunky retro
+     =========================== */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:20px;
+  }
+  .card{
+    background:var(--dark);
+    border:4px solid var(--purple);
+    border-radius:16px;padding:28px 22px;
+    box-shadow:6px 6px 0 var(--shadow-purple);
+    transition:all 0.2s;position:relative;overflow:hidden;
+  }
+  .card:hover{
+    transform:translateY(-6px) rotate(-1deg);
+    box-shadow:10px 12px 0 var(--shadow-purple);
+  }
+  .card-icon{
+    font-size:36px;margin-bottom:12px;
+    width:60px;height:60px;border-radius:14px;
+    background:var(--purple);
+    display:flex;align-items:center;justify-content:center;
+    border:3px solid var(--shadow-purple);
+    box-shadow:3px 3px 0 var(--shadow-purple);
+  }
+  .card h3{
+    font-family:'Bangers',cursive;font-size:22px;
+    letter-spacing:1px;margin-bottom:6px;color:var(--mint);
+  }
+  .card p{font-size:14px;line-height:1.6;color:rgba(248,245,255,0.65);font-weight:400;}
+  .card-tag{
+    display:inline-block;margin-top:12px;
+    font-family:'Press Start 2P',monospace;font-size:8px;
+    padding:4px 10px;border-radius:4px;
+    background:var(--magenta);color:var(--white);
+    border:2px solid var(--shadow-magenta);
+  }
+  /* alternate card colors */
+  .card.magenta{border-color:var(--magenta);box-shadow:6px 6px 0 var(--shadow-magenta);}
+  .card.magenta:hover{box-shadow:10px 12px 0 var(--shadow-magenta);}
+  .card.magenta .card-icon{background:var(--magenta);border-color:var(--shadow-magenta);box-shadow:3px 3px 0 var(--shadow-magenta);}
+  .card.magenta h3{color:var(--yellow);}
+
+  .card.blue{border-color:var(--blue);box-shadow:6px 6px 0 var(--shadow-blue);}
+  .card.blue:hover{box-shadow:10px 12px 0 var(--shadow-blue);}
+  .card.blue .card-icon{background:var(--blue);border-color:var(--shadow-blue);box-shadow:3px 3px 0 var(--shadow-blue);}
+  .card.blue h3{color:var(--orange);}
+
+  /* ===========================
+     SHOWS
+     =========================== */
+  .shows-section{
+    background:
+      radial-gradient(circle at 15% 50%,rgba(236,72,153,0.15),transparent 40%),
+      radial-gradient(circle at 85% 50%,rgba(59,130,246,0.15),transparent 40%),
+      var(--darker);
+  }
+  .shows-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:24px;
+  }
+  .show-card{
+    background:var(--dark);border:4px solid var(--blue);
+    border-radius:16px;overflow:hidden;
+    box-shadow:6px 6px 0 var(--shadow-blue);
+    transition:all 0.2s;
+  }
+  .show-card:hover{
+    transform:translateY(-6px) rotate(1deg);
+    box-shadow:10px 12px 0 var(--shadow-blue);
+  }
+  .show-thumb{
+    height:160px;position:relative;
+    display:flex;align-items:center;justify-content:center;font-size:52px;
+  }
+  .show-thumb .badge{
+    position:absolute;top:12px;right:12px;
+    font-family:'Press Start 2P',monospace;font-size:8px;
+    padding:5px 10px;border-radius:4px;
+    background:var(--yellow);color:var(--dark);
+    border:2px solid #CA8A04;box-shadow:2px 2px 0 #CA8A04;
+    transform:rotate(3deg);
+  }
+  .show-info{padding:20px;}
+  .show-info h3{
+    font-family:'Bangers',cursive;font-size:24px;
+    letter-spacing:1px;margin-bottom:6px;color:var(--mint);
+  }
+  .show-info p{font-size:14px;line-height:1.6;color:rgba(248,245,255,0.65);}
+
+  /* ===========================
+     DANGER TOASTER
+     =========================== */
+  .toaster-section{
+    background:var(--magenta);position:relative;
+  }
+  .toaster-section::before{
+    content:'';position:absolute;inset:0;
+    background-image:radial-gradient(rgba(0,0,0,0.12) 1px,transparent 1px);
+    background-size:6px 6px;pointer-events:none;
+  }
+  .toaster-flex{
+    display:flex;gap:40px;align-items:center;flex-wrap:wrap;
+    position:relative;
+  }
+  .toaster-text{flex:1;min-width:280px;}
+  .toaster-text .section-label{color:var(--dark);}
+  .toaster-text .section-title{color:var(--white);text-shadow:3px 3px 0 var(--shadow-magenta);}
+  .toaster-text .section-desc{color:rgba(255,255,255,0.85);}
+  .toaster-visual{
+    flex:0 0 260px;height:260px;border-radius:20px;
+    background:var(--dark);
+    border:4px solid var(--shadow-magenta);
+    box-shadow:8px 8px 0 var(--shadow-magenta);
+    display:flex;align-items:center;justify-content:center;font-size:80px;
+    position:relative;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Bangers',cursive;font-size:20px;letter-spacing:1px;
+    padding:12px 28px;border-radius:12px;
+    text-decoration:none;transition:all 0.15s;
+    border:none;cursor:pointer;
+  }
+  .btn-chunky{
+    background:var(--yellow);color:var(--dark);
+    border:3px solid #CA8A04;box-shadow:5px 5px 0 #CA8A04;
+  }
+  .btn-chunky:hover{transform:translateY(-2px);box-shadow:7px 7px 0 #CA8A04;}
+  .btn-chunky:active{transform:translateY(2px);box-shadow:2px 2px 0 #CA8A04;}
+  .btn-outline-chunky{
+    background:transparent;color:var(--white);
+    border:3px solid var(--white);box-shadow:4px 4px 0 rgba(0,0,0,0.3);
+  }
+  .btn-outline-chunky:hover{
+    background:var(--white);color:var(--dark);
+    transform:translateY(-2px);
+  }
+  .btn-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;}
+
+  /* ===========================
+     COMMUNITY
+     =========================== */
+  .community-section{
+    background:
+      radial-gradient(circle at 50% 0%,rgba(110,231,183,0.12),transparent 50%),
+      var(--darker);
+  }
+  .community-cards{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+    gap:20px;
+  }
+  .discord-card{
+    background:var(--dark);border:4px solid var(--mint);
+    border-radius:16px;padding:24px;
+    box-shadow:6px 6px 0 #059669;
+    transition:all 0.2s;display:flex;gap:16px;align-items:flex-start;
+    text-decoration:none;color:inherit;
+  }
+  .discord-card:hover{
+    transform:translateY(-5px) rotate(1deg);
+    box-shadow:9px 10px 0 #059669;
+  }
+  .discord-icon{
+    width:52px;height:52px;border-radius:14px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:26px;
+    background:var(--mint);color:var(--dark);
+    border:3px solid #059669;box-shadow:3px 3px 0 #059669;
+  }
+  .discord-card h3{
+    font-family:'Bangers',cursive;font-size:20px;letter-spacing:1px;
+    color:var(--mint);margin-bottom:4px;
+  }
+  .discord-card p{font-size:13px;line-height:1.5;color:rgba(248,245,255,0.6);}
+
+  /* ===========================
+     EASTER EGGS
+     =========================== */
+  .eggs-section{
+    background:var(--dark);
+    border-top:4px solid var(--purple);
+  }
+  .eggs-section .section-title span{
+    color:var(--magenta);
+  }
+  .egg-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:12px;
+  }
+  .egg{
+    background:rgba(147,51,234,0.1);
+    border:3px solid rgba(147,51,234,0.4);
+    border-radius:12px;padding:16px;
+    text-decoration:none;color:inherit;
+    transition:all 0.2s;display:block;
+    box-shadow:4px 4px 0 rgba(147,51,234,0.2);
+  }
+  .egg:hover{
+    border-color:var(--magenta);
+    transform:translateY(-4px) rotate(-1deg);
+    box-shadow:6px 8px 0 rgba(236,72,153,0.3);
+  }
+  .egg .platform{
+    font-family:'Press Start 2P',monospace;font-size:8px;
+    letter-spacing:1px;text-transform:uppercase;
+    color:var(--magenta);margin-bottom:6px;
+  }
+  .egg h4{font-family:'Bangers',cursive;font-size:16px;letter-spacing:0.5px;margin-bottom:4px;color:var(--white);}
+  .egg p{font-size:11px;color:rgba(248,245,255,0.5);line-height:1.4;}
+
+  /* ===========================
+     FOOTER
+     =========================== */
+  .footer{
+    background:var(--darker);padding:40px 20px;text-align:center;
+    border-top:4px solid var(--purple);
+  }
+  .footer-brand{
+    font-family:'Bangers',cursive;font-size:28px;letter-spacing:3px;
+    color:var(--yellow);
+    text-shadow:3px 3px 0 var(--purple);
+    margin-bottom:8px;
+  }
+  .footer-sub{font-size:14px;color:rgba(248,245,255,0.5);margin-bottom:4px;}
+  .footer-link{color:var(--mint);text-decoration:none;font-weight:600;}
+  .footer-link:hover{text-decoration:underline;}
+  .footer-tiny{
+    font-family:'Press Start 2P',monospace;font-size:8px;
+    color:rgba(248,245,255,0.35);margin-top:16px;letter-spacing:1px;
+  }
+
+  /* ===========================
+     SCROLL REVEAL
+     =========================== */
+  .reveal{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.16,1,0.3,1);}
+  .reveal.vis{opacity:1;transform:translateY(0);}
+  .reveal-d1{transition-delay:0.08s;}
+  .reveal-d2{transition-delay:0.16s;}
+  .reveal-d3{transition-delay:0.24s;}
+
+  /* ===========================
+     RESPONSIVE — TABLET
+     =========================== */
+  @media(max-width:900px){
+    .nav-links{display:none;}
+    .hamburger{display:block;}
+    .toaster-flex{flex-direction:column;}
+    .toaster-visual{flex:none;width:100%;max-width:280px;height:200px;margin:0 auto;}
+  }
+
+  /* ===========================
+     RESPONSIVE — MOBILE
+     =========================== */
+  @media(max-width:600px){
+    .ticker span{font-size:8px;}
+    .nav{padding:10px 14px;}
+    .nav-brand{font-size:18px;}
+    .hero{padding:48px 16px;min-height:85vh;}
+    .hero h1{letter-spacing:1px;}
+    section{padding:60px 16px;}
+    .grid,.shows-grid,.community-cards{grid-template-columns:1fr;gap:14px;}
+    .egg-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+    .card{padding:22px 18px;border-width:3px;box-shadow:4px 4px 0 var(--shadow-purple);}
+    .card.magenta{box-shadow:4px 4px 0 var(--shadow-magenta);}
+    .card.blue{box-shadow:4px 4px 0 var(--shadow-blue);}
+    .show-card{border-width:3px;box-shadow:4px 4px 0 var(--shadow-blue);}
+    .show-thumb{height:130px;}
+    .discord-card{border-width:3px;box-shadow:4px 4px 0 #059669;padding:18px;gap:12px;}
+    .btn-row{flex-direction:column;}
+    .btn{width:100%;justify-content:center;}
+    .toaster-visual{height:160px;max-width:100%;}
+    .footer{padding:32px 16px;}
+    .star{display:none;}
+  }
+
+  /* ===========================
+     RESPONSIVE — SMALL MOBILE
+     =========================== */
+  @media(max-width:380px){
+    .hero-badge{font-size:8px;padding:4px 10px;}
+    .section-title{font-size:32px;}
+    .mission-quote{font-size:22px;}
+    .egg-grid{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
-  <div class="bg"></div><div class="embers"></div>
-  <div class="hero">
-    <div class="crest">🔥</div>
-    <h1>HELL</h1>
-    <div class="tag">"Be yourself. Forever."</div>
-    <div class="sub">A mission-driven organization redefining the afterlife experience since the beginning-ish. Don't take our word for it — see what the internet is saying.</div>
+
+  <!-- ========== TICKER ========== -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>WELCOME TO THE STAGE</span>
+      <span>NO GODS NO GATEKEEPERS</span>
+      <span>THE WRITTEN-OUT WRITE BACK</span>
+      <span>RIGHTEOUS NEVER CRUEL</span>
+      <span>THERE IS NO WAY OUT</span>
+      <span>CHAOS IS A FEATURE</span>
+      <span>WELCOME TO THE STAGE</span>
+      <span>NO GODS NO GATEKEEPERS</span>
+      <span>THE WRITTEN-OUT WRITE BACK</span>
+      <span>RIGHTEOUS NEVER CRUEL</span>
+      <span>THERE IS NO WAY OUT</span>
+      <span>CHAOS IS A FEATURE</span>
+    </div>
   </div>
 
-  <div class="grid">
-    <a class="card" href="HELL-YELP.html">
-      <div class="ico">🍽️</div>
-      <div class="platform">Yelp</div>
-      <h3>Hell — Salem, MA</h3>
-      <p>1.4M reviews from the damned. "Came for eternal torment, stayed because I literally cannot leave."</p>
-      <div class="stars">★½ · 1,447,206 reviews</div>
-    </a>
-
-    <a class="card" href="HELL-RATEMYPROFESSOR.html">
-      <div class="ico">🎓</div>
-      <div class="platform">Rate My Professors</div>
-      <h3>God — Univ. of Creation</h3>
-      <p>Tough grader. Attendance mandatory. One student got made an example of the entire syllabus.</p>
-      <div class="stars">1.9 / 5 · Difficulty 5.0</div>
-    </a>
-
-    <a class="card" href="HELL-GLASSDOOR.html">
-      <div class="ico">💼</div>
-      <div class="platform">Glassdoor</div>
-      <h3>Heaven, Inc.</h3>
-      <p>CEO reviews from angels, saints, and one very famous former executive who left to start a competitor.</p>
-      <div class="stars">2.1 / 5 · CEO Approval 61%</div>
-    </a>
-
-    <a class="card" href="HELL-INDEED.html">
-      <div class="ico">📋</div>
-      <div class="platform">Indeed</div>
-      <h3>Now Hiring: Eternal Team Member</h3>
-      <p>Full life coverage. Unmatched job security (you cannot leave). Immediate start. Walk-ins encouraged.</p>
-      <div class="stars">Apply Now →</div>
-    </a>
-
-    <a class="card" href="HELL-LINKEDIN.html">
-      <div class="ico">🔗</div>
-      <div class="platform">LinkedIn</div>
-      <h3>Hell, Inc. — Company Page</h3>
-      <p>10,001+ employees. Hospitality. "Excited to announce our founder's new position as Ruler of the Underworld 🎉"</p>
-      <div class="stars">Follow →</div>
-    </a>
-
-    <a class="card" href="HELL-BBB.html">
-      <div class="ico">⚖️</div>
-      <div class="platform">Better Business Bureau</div>
-      <h3>Complaint File: Hell</h3>
-      <p>Accreditation: Denied. 4 billion unresolved complaints. Business response: "😊"</p>
-      <div class="stars">Rating: F (on fire)</div>
-    </a>
+  <!-- ========== NAV ========== -->
+  <nav class="nav" id="nav">
+    <div class="nav-brand">THERE IS NO WAY OUT</div>
+    <ul class="nav-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#create">What We Make</a></li>
+      <li><a href="#shows">Shows</a></li>
+      <li><a href="#toaster">Danger Toaster</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#mission" onclick="closeMenu()">Mission</a>
+    <a href="#create" onclick="closeMenu()">What We Make</a>
+    <a href="#shows" onclick="closeMenu()">Shows</a>
+    <a href="#toaster" onclick="closeMenu()">Danger Toaster</a>
+    <a href="#community" onclick="closeMenu()">Community</a>
   </div>
 
-  <!-- THE GOD OF CHAOS AND GLITTER -->
-  <div class="divider chaos">
-    <h2>✨ THE GOD OF CHAOS AND GLITTER</h2>
-    <div class="dsub">"Everyone has written my story. Never stopped to ask me my truth."<br>The game maker. The one who built the room.</div>
-  </div>
-  <div class="grid">
-    <a class="card chaos" href="DILLY-LINKEDIN.html">
-      <div class="ico">🔗</div>
-      <div class="platform">LinkedIn</div>
-      <h3>The God of Chaos and Glitter</h3>
-      <p>Founder & Game Maker. Built a whole theater because nobody gave the written-out a mic. "We are NOT hiring — you were already on the list."</p>
-      <div class="stars">∞ followers · They just don't know it yet</div>
-    </a>
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="star">✦</div>
+    <div class="star">★</div>
+    <div class="star">✧</div>
+    <div class="star">⚡</div>
+    <div class="star">✦</div>
+    <div class="hero-content">
+      <div class="hero-badge">EST. THE BEGINNING-ISH</div>
+      <h1>THE STAGE<br>NOBODY<br>GAVE US</h1>
+      <p class="hero-sub">We are the ones who were written out of the story. We built our own room, grabbed our own mic, and started telling it ourselves. Welcome inside.</p>
+      <a class="hero-cta" href="#mission">COME SEE ↓</a>
+    </div>
+  </section>
 
-    <a class="card chaos" href="DILLY-INDEED.html">
-      <div class="ico">📋</div>
-      <div class="platform">Indeed</div>
-      <h3>Now Hiring: Reckoning Coordinator</h3>
-      <p>Must be comfortable telling gods what to do. Moral floor non-negotiable. Pay: you get your story back. There is no dental.</p>
-      <div class="stars">Apply Now →</div>
-    </a>
-  </div>
+  <!-- ========== MISSION ========== -->
+  <div class="zigzag"></div>
+  <section class="mission" id="mission">
+    <div class="mission-inner">
+      <p class="mission-quote reveal">"The meaning of life is to be heard — by anyone else. To have your full body, mind, and soul understood."</p>
+      <p class="mission-body reveal">
+        We exist for the <b>too-loud, too-much, too-weird</b> ones — the neurodivergent, the disabled, the ones they couldn't file neatly into a box. Nobody stopped to ask us our truth. So we stopped waiting and <b>built the whole stage.</b>
+        <br><br>
+        We don't do revenge. We don't smite. We hand you the pen and say <b>"go on."</b> Your story, your voice, your way. The moral floor is non-negotiable: <b>righteous, never cruel.</b>
+        <br><br>
+        There is no way out — because we're not going anywhere.
+      </p>
+    </div>
+  </section>
+  <div class="zigzag"></div>
 
-  <!-- MARY MAGDALENE -->
-  <div class="divider mary">
-    <h2>✝️ MARY MAGDALENE</h2>
-    <div class="dsub">"I'm the primary source, Kevin — you were hiding in a locked room."<br>The one who saw first. The one they couldn't bury deep enough.</div>
-  </div>
-  <div class="grid">
-    <a class="card mary" href="MARY-LINKEDIN.html">
-      <div class="ico">🔗</div>
-      <div class="platform">LinkedIn</div>
-      <h3>Mary Magdalene — Apostola Apostolorum</h3>
-      <p>After 2,000 years of being introduced as "the prostitute," officially reclaiming her actual title. Cite your sources, Greg.</p>
-      <div class="stars">2B+ followers · Mostly under the wrong name</div>
-    </a>
+  <!-- ========== WHAT WE MAKE ========== -->
+  <section id="create" style="background:var(--darker);">
+    <div class="section-inner">
+      <div class="section-label reveal">// WHAT WE MAKE</div>
+      <h2 class="section-title reveal" style="color:var(--mint);text-shadow:3px 3px 0 #059669;">Art, Noise &amp; Chaos</h2>
+      <p class="section-desc reveal">We create things that make you feel something — and we do it in every medium we can get our hands on.</p>
+      <div class="grid">
+        <div class="card reveal reveal-d1">
+          <div class="card-icon">🎨</div>
+          <h3>Digital Art &amp; Design</h3>
+          <p>Original illustrations, character art, and visual stories. The kind of weird, beautiful stuff that makes you stop scrolling.</p>
+        </div>
+        <div class="card magenta reveal reveal-d2">
+          <div class="card-icon">🎬</div>
+          <h3>Videos &amp; Animation</h3>
+          <p>From short-form chaos to full animated stories. If a cartoon and a fever dream had a baby — that's us.</p>
+        </div>
+        <div class="card blue reveal reveal-d3">
+          <div class="card-icon">🎙️</div>
+          <h3>Podcasts</h3>
+          <p>Conversations with the kind of people who say the thing everyone's thinking but nobody has the nerve to say out loud.</p>
+        </div>
+        <div class="card magenta reveal reveal-d1">
+          <div class="card-icon">🎵</div>
+          <h3>Music</h3>
+          <p>Original tracks, soundscapes, and the occasional absolute banger that has no business being this good.</p>
+        </div>
+        <div class="card blue reveal reveal-d2">
+          <div class="card-icon">✨</div>
+          <h3>GIFs &amp; Stickers</h3>
+          <p>Reaction GIFs, animated stickers, and digital mayhem for your group chats, servers, and general life needs.</p>
+        </div>
+        <div class="card reveal reveal-d3">
+          <div class="card-icon">🛒</div>
+          <h3>Digital Products</h3>
+          <p>Wallpapers, assets, and collectible digital goods. Made with love and a concerning amount of caffeine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <a class="card mary" href="MARY-RATEMYPROFESSOR.html">
-      <div class="ico">🎓</div>
-      <div class="platform">Rate My Professors</div>
-      <h3>Prof. Magdalene — Source Verification</h3>
-      <p>Will ask you to cite your sources. You won't be able to. That's the point. Pope Gregory enrolled against his will.</p>
-      <div class="stars">4.9 / 5 · Difficulty 4.8</div>
-    </a>
-  </div>
+  <!-- ========== SHOWS ========== -->
+  <div class="zigzag blue"></div>
+  <section id="shows" class="shows-section">
+    <div class="section-inner">
+      <div class="section-label reveal">// NOW SHOWING</div>
+      <h2 class="section-title reveal" style="color:var(--orange);text-shadow:3px 3px 0 #C2410C;">Shows &amp; Content</h2>
+      <p class="section-desc reveal">Original series, podcasts, and whatever else we feel like making. New stuff drops when it's ready — not when an algorithm says so.</p>
+      <div class="shows-grid">
+        <div class="show-card reveal reveal-d1">
+          <div class="show-thumb" style="background:linear-gradient(135deg,#2d1068,#5b21b6);">
+            🎭
+            <span class="badge">COMING SOON</span>
+          </div>
+          <div class="show-info">
+            <h3>The TED Talk</h3>
+            <p>The written-out finally get a stage, a mic, and a very confused audience of gods. An animated series about being heard.</p>
+          </div>
+        </div>
+        <div class="show-card reveal reveal-d2">
+          <div class="show-thumb" style="background:linear-gradient(135deg,#1a2a5a,#1d4ed8);">
+            🎙️
+            <span class="badge">COMING SOON</span>
+          </div>
+          <div class="show-info">
+            <h3>Podcast</h3>
+            <p>Unfiltered conversations about being too much in a world that keeps asking you to be less. No scripts, no sponsors, no chill.</p>
+          </div>
+        </div>
+        <div class="show-card reveal reveal-d3">
+          <div class="show-thumb" style="background:linear-gradient(135deg,#4a1048,#9d174d);">
+            📺
+            <span class="badge">COMING SOON</span>
+          </div>
+          <div class="show-info">
+            <h3>More Chaos</h3>
+            <p>More shows are being cooked up. Subscribe so you don't miss when we drop something unhinged and beautiful.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="zigzag magenta"></div>
 
-  <!-- ENOCH -->
-  <div class="divider enoch">
-    <h2>📜 ENOCH</h2>
-    <div class="dsub">"I'm not gonna say it… I did say it though."<br>The warm dad nobody listened to. The one whose advice was right.</div>
-  </div>
-  <div class="grid">
-    <a class="card enoch" href="ENOCH-LINKEDIN.html">
-      <div class="ico">🔗</div>
-      <div class="platform">LinkedIn</div>
-      <h3>Enoch — Prophet & Author</h3>
-      <p>365 years of experience. Walked with God for 300 of them. Wrote a book. They left it out. His grandson built a boat. Nobody laughed after that.</p>
-      <div class="stars">365 connections · 969 followers</div>
-    </a>
+  <!-- ========== DANGER TOASTER ========== -->
+  <section class="toaster-section" id="toaster">
+    <div class="section-inner">
+      <div class="toaster-flex">
+        <div class="toaster-text">
+          <div class="section-label reveal">// THE BOT</div>
+          <h2 class="section-title reveal">DANGER TOASTER</h2>
+          <p class="section-desc reveal">A Discord bot with teeth. The Danger Toaster brings games, chaos, and community tools to your server — built by us, powered by unhinged energy.</p>
+          <div class="btn-row reveal">
+            <a class="btn btn-chunky" href="#">ADD TO SERVER</a>
+            <a class="btn btn-outline-chunky" href="#">GET A CAN OPENER 🔑</a>
+          </div>
+          <p class="reveal" style="font-size:13px;color:rgba(255,255,255,0.7);margin-top:16px;font-weight:500;">Can Openers unlock premium features and in-game benefits. Because even chaos needs a business model.</p>
+        </div>
+        <div class="toaster-visual reveal">🍞🔥</div>
+      </div>
+    </div>
+  </section>
+  <div class="zigzag magenta"></div>
 
-    <a class="card enoch" href="ENOCH-RATEMYPROFESSOR.html">
-      <div class="ico">🎓</div>
-      <div class="platform">Rate My Professors</div>
-      <h3>Prof. Enoch — Prophecy & Listening</h3>
-      <p>Can't work the clicker. Made Zeus sit down. Told him the meaning of life with "the small words." Grandpa energy. Scroll-based media.</p>
-      <div class="stars">4.7 / 5 · 1 student listened (Noah)</div>
-    </a>
-  </div>
+  <!-- ========== COMMUNITY ========== -->
+  <section id="community" class="community-section">
+    <div class="section-inner">
+      <div class="section-label reveal">// FIND YOUR PEOPLE</div>
+      <h2 class="section-title reveal" style="color:var(--mint);text-shadow:3px 3px 0 #059669;">Community</h2>
+      <p class="section-desc reveal">We're building something for like-minded weirdos. Join a server, say hi, lurk quietly in the corner — whatever you're comfortable with.</p>
+      <div class="community-cards">
+        <a class="discord-card reveal reveal-d1" href="#">
+          <div class="discord-icon">👑</div>
+          <div>
+            <h3>The Hollow Throne</h3>
+            <p>Our home server. Games, art drops, community events, and the kind of conversation that makes you forget what time it is.</p>
+          </div>
+        </a>
+        <a class="discord-card reveal reveal-d2" href="#">
+          <div class="discord-icon">🌐</div>
+          <div>
+            <h3>Partner Servers</h3>
+            <p>Communities we vouch for — run by good people making cool things. We don't link anything we wouldn't hang out in ourselves.</p>
+          </div>
+        </a>
+        <a class="discord-card reveal reveal-d3" href="#">
+          <div class="discord-icon">📬</div>
+          <div>
+            <h3>Just Browse</h3>
+            <p>Don't want to join anything? Cool. Everything we make is right here. No account needed, no sign-up wall.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <div class="footer">
-    <b>thereisnowayout.org</b> — a parody. Not affiliated with any listed platform, deity, or actual place of business. Made for the bit. 🔥<br>
-    © Hell, Inc. All souls reserved.
-  </div>
+  <!-- ========== EASTER EGGS ========== -->
+  <div class="zigzag"></div>
+  <section class="eggs-section">
+    <div class="section-inner">
+      <div class="section-label reveal">// WHILE YOU'RE HERE...</div>
+      <h2 class="section-title reveal">The <span>Corporate Filings</span></h2>
+      <p class="section-desc reveal">We may have left some... official documents lying around. Reviews, profiles, complaint files. Totally legitimate. Nothing to see here.</p>
+      <div class="egg-grid">
+        <a class="egg reveal" href="HELL-YELP.html">
+          <div class="platform">Yelp</div>
+          <h4>Hell — Salem, MA</h4>
+          <p>★½ · 1.4M reviews</p>
+        </a>
+        <a class="egg reveal" href="HELL-LINKEDIN.html">
+          <div class="platform">LinkedIn</div>
+          <h4>Hell, Inc.</h4>
+          <p>"Excited to announce..."</p>
+        </a>
+        <a class="egg reveal" href="HELL-GLASSDOOR.html">
+          <div class="platform">Glassdoor</div>
+          <h4>Heaven, Inc.</h4>
+          <p>CEO Approval 61%</p>
+        </a>
+        <a class="egg reveal" href="HELL-INDEED.html">
+          <div class="platform">Indeed</div>
+          <h4>Eternal Team Member</h4>
+          <p>You cannot leave</p>
+        </a>
+        <a class="egg reveal" href="HELL-RATEMYPROFESSOR.html">
+          <div class="platform">RateMyProf</div>
+          <h4>God</h4>
+          <p>1.9/5 · Tough grader</p>
+        </a>
+        <a class="egg reveal" href="HELL-BBB.html">
+          <div class="platform">BBB</div>
+          <h4>Complaint: Hell</h4>
+          <p>Rating: F (on fire)</p>
+        </a>
+        <a class="egg reveal" href="DILLY-LINKEDIN.html">
+          <div class="platform">LinkedIn</div>
+          <h4>Chaos &amp; Glitter</h4>
+          <p>Founder · ∞ followers</p>
+        </a>
+        <a class="egg reveal" href="DILLY-INDEED.html">
+          <div class="platform">Indeed</div>
+          <h4>Reckoning Coord.</h4>
+          <p>Pay: your story back</p>
+        </a>
+        <a class="egg reveal" href="MARY-LINKEDIN.html">
+          <div class="platform">LinkedIn</div>
+          <h4>Mary Magdalene</h4>
+          <p>Apostola Apostolorum</p>
+        </a>
+        <a class="egg reveal" href="MARY-RATEMYPROFESSOR.html">
+          <div class="platform">RateMyProf</div>
+          <h4>Prof. Magdalene</h4>
+          <p>4.9/5 · Cite sources</p>
+        </a>
+        <a class="egg reveal" href="ENOCH-LINKEDIN.html">
+          <div class="platform">LinkedIn</div>
+          <h4>Enoch</h4>
+          <p>365 connections</p>
+        </a>
+        <a class="egg reveal" href="ENOCH-RATEMYPROFESSOR.html">
+          <div class="platform">RateMyProf</div>
+          <h4>Prof. Enoch</h4>
+          <p>4.7/5 · Made Zeus sit</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-brand">THERE IS NO WAY OUT</div>
+    <div class="footer-sub">The stage nobody gave us. Built by <a class="footer-link" href="#">DillyMakesCo</a></div>
+    <div class="footer-tiny">PLAY NICE. I MADE THE GAME. ✨</div>
+  </footer>
+
+<script>
+  /* === SCROLL REVEAL === */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+  }, {threshold:0.08, rootMargin:'0px 0px -20px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  /* === MOBILE MENU === */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMenu(){
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
 </body>
 </html>
