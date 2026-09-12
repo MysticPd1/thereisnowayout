@@ -93,7 +93,7 @@
     font-weight:900;letter-spacing:clamp(4px,1.5vw,12px);
     text-transform:uppercase;text-align:center;
     color:#e8e8e8;position:relative;
-    opacity:0;animation:glitchIn 0.6s ease-out 3s forwards;
+    opacity:0;animation:glitchIn 1.2s ease-out 3s forwards;
     margin-bottom:48px;line-height:1.15;
   }
   /* chromatic aberration glitch layers */
@@ -127,12 +127,13 @@
     95%,100%{clip-path:inset(85% 0 0 0);transform:translate(0)}
   }
   @keyframes glitchIn{
-    0%{opacity:0;transform:scale(1.08);filter:blur(6px) brightness(3)}
-    15%{opacity:1;transform:translate(-6px,3px) skewX(-2deg);filter:brightness(1.5)}
-    30%{transform:translate(4px,-2px) skewX(1deg);filter:brightness(0.8)}
-    50%{transform:translate(-2px,1px);filter:none}
-    70%{transform:translate(1px,0)}
-    100%{opacity:1;transform:translate(0);filter:none}
+    0%{opacity:0;transform:translateX(12px);filter:blur(2px)}
+    20%{opacity:0.3;transform:translateX(-8px)}
+    35%{opacity:0.5;transform:translateX(5px);filter:blur(0)}
+    50%{opacity:0.7;transform:translateX(-3px)}
+    65%{opacity:0.85;transform:translateX(2px)}
+    80%{opacity:0.95;transform:translateX(-1px)}
+    100%{opacity:1;transform:translateX(0);filter:none}
   }
 
   /* === PROMPT === */
