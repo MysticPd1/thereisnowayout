@@ -3,189 +3,319 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>thereisnowayout.org</title>
+<title>THERE IS NO WAY OUT</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:#0a0708;color:#f3 e9e9;color:#f3e9e9;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
-  .bg{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 120%,#c0392b 0%,#5a1410 32%,#180809 62%,#0a0708 100%);z-index:-2;}
-  .embers{position:fixed;inset:0;z-index:-1;background-image:radial-gradient(2px 2px at 15% 80%,rgba(255,190,90,.8),transparent),radial-gradient(2px 2px at 70% 70%,rgba(255,160,60,.7),transparent),radial-gradient(1.5px 1.5px at 40% 90%,rgba(255,220,140,.6),transparent),radial-gradient(1.5px 1.5px at 85% 85%,rgba(255,170,70,.7),transparent),radial-gradient(2px 2px at 55% 75%,rgba(255,200,100,.6),transparent);animation:rise 8s linear infinite;}
-  @keyframes rise{from{background-position:0 0,0 0,0 0,0 0,0 0;}to{background-position:0 -400px,0 -600px,0 -500px,0 -700px,0 -450px;}}
-  .hero{text-align:center;padding:90px 20px 40px;}
-  .crest{font-size:64px;margin-bottom:10px;filter:drop-shadow(0 0 24px rgba(255,120,40,.7));}
-  h1{font-size:60px;font-weight:800;letter-spacing:-1.5px;background:linear-gradient(180deg,#fff,#ffb56b);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .tag{font-size:20px;color:#ffcaa0;font-style:italic;margin-top:8px;letter-spacing:.5px;}
-  .sub{max-width:600px;margin:22px auto 0;color:#d9b8b0;font-size:15px;line-height:1.6;}
-  .grid{max-width:1000px;margin:50px auto 90px;padding:0 24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;}
-  a.card{display:block;background:rgba(28,14,14,.72);border:1px solid rgba(255,120,60,.28);border-radius:14px;padding:26px;text-decoration:none;color:inherit;backdrop-filter:blur(6px);transition:transform .18s,border-color .18s,box-shadow .18s;}
-  a.card:hover{transform:translateY(-4px);border-color:rgba(255,150,80,.7);box-shadow:0 12px 40px rgba(200,60,20,.35);}
-  .card .ico{font-size:34px;margin-bottom:14px;}
-  .card .platform{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#ff9a5a;font-weight:800;margin-bottom:6px;}
-  .card h3{font-size:21px;font-weight:800;margin-bottom:8px;color:#fff;}
-  .card p{font-size:13.5px;color:#c9a89f;line-height:1.5;}
-  .card .stars{margin-top:14px;font-size:14px;color:#ffce54;}
-  .divider{max-width:1000px;margin:20px auto 10px;padding:0 24px;}
-  .divider h2{font-size:36px;font-weight:800;letter-spacing:-1px;text-align:center;margin-bottom:6px;}
-  .divider .dsub{text-align:center;font-size:15px;font-style:italic;line-height:1.5;max-width:600px;margin:0 auto;}
+  body{
+    background:#000;color:#e8e8e8;
+    font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;
+    overflow:hidden;height:100vh;
+    cursor:crosshair;
+  }
 
-  .divider.chaos h2{background:linear-gradient(180deg,#fff,#d8b4fe);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .divider.chaos .dsub{color:#c9a0e8;}
+  /* === TV STATIC NOISE (canvas behind everything) === */
+  #noise{
+    position:fixed;inset:0;width:100%;height:100%;
+    opacity:0.06;z-index:1;pointer-events:none;
+    image-rendering:pixelated;
+  }
 
-  .divider.mary h2{background:linear-gradient(180deg,#fff,#f0c27f);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .divider.mary .dsub{color:#d4b08a;}
+  /* === CRT SCANLINES === */
+  .scanlines{
+    position:fixed;inset:0;z-index:2;pointer-events:none;
+    background:repeating-linear-gradient(
+      0deg,transparent,transparent 2px,
+      rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 4px
+    );
+  }
 
-  .divider.enoch h2{background:linear-gradient(180deg,#fff,#d4b896);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .divider.enoch .dsub{color:#c9b299;}
+  /* === VHS TRACKING BAR === */
+  .tracking{
+    position:fixed;left:0;right:0;height:6px;
+    background:linear-gradient(180deg,transparent,rgba(255,255,255,0.04),transparent);
+    z-index:2;pointer-events:none;
+    animation:trackSlide 8s linear infinite;
+  }
+  @keyframes trackSlide{
+    0%{top:-6px}
+    100%{top:100vh}
+  }
 
-  a.card.chaos{border-color:rgba(168,85,247,.28);}
-  a.card.chaos:hover{border-color:rgba(168,85,247,.7);box-shadow:0 12px 40px rgba(120,50,200,.3);}
-  a.card.chaos .platform{color:#c084fc;}
-  a.card.chaos .stars{color:#d8b4fe;}
+  /* === VIGNETTE === */
+  .vignette{
+    position:fixed;inset:0;z-index:3;pointer-events:none;
+    background:radial-gradient(ellipse at center,
+      transparent 40%,rgba(0,0,0,0.55) 75%,rgba(0,0,0,0.95) 100%
+    );
+  }
 
-  a.card.mary{border-color:rgba(192,112,58,.28);}
-  a.card.mary:hover{border-color:rgba(192,112,58,.7);box-shadow:0 12px 40px rgba(160,90,30,.3);}
-  a.card.mary .platform{color:#e8a96a;}
-  a.card.mary .stars{color:#f0c27f;}
+  /* === SCREEN FLICKER === */
+  .flicker{
+    position:fixed;inset:0;z-index:4;pointer-events:none;
+    animation:flicker 6s infinite;
+  }
+  @keyframes flicker{
+    0%,93%,95%,97%,100%{opacity:0}
+    94%{opacity:0.025;background:#fff}
+    96%{opacity:0.015;background:#fff}
+  }
 
-  a.card.enoch{border-color:rgba(139,111,78,.28);}
-  a.card.enoch:hover{border-color:rgba(139,111,78,.7);box-shadow:0 12px 40px rgba(120,90,50,.3);}
-  a.card.enoch .platform{color:#c9a87a;}
-  a.card.enoch .stars{color:#d4b896;}
+  /* === CONTENT LAYER === */
+  .content{
+    position:relative;z-index:5;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    height:100vh;padding:20px;
+  }
 
-  .footer{text-align:center;padding:30px 20px 50px;color:#7a5a52;font-size:12px;}
-  .footer b{color:#b98a7f;}
+  /* === EYES === */
+  .eyes{
+    display:flex;gap:50px;margin-bottom:55px;
+    opacity:0;animation:fadeIn 2.5s ease-out 0.8s forwards;
+  }
+  .eye{
+    width:130px;height:62px;
+    background:radial-gradient(ellipse at center,#f0f0f0 60%,#ccc 100%);
+    border-radius:50%;position:relative;
+    box-shadow:0 0 50px rgba(255,255,255,0.1),0 0 100px rgba(255,255,255,0.05);
+    overflow:hidden;
+    animation:blink 5s ease-in-out infinite;
+  }
+  .eye:nth-child(2){animation-delay:0.06s;}
+
+  @keyframes blink{
+    0%,94%,100%{transform:scaleY(1)}
+    96%{transform:scaleY(0.04)}
+    98%{transform:scaleY(1)}
+  }
+
+  /* iris + pupil */
+  .iris{
+    width:36px;height:36px;
+    background:radial-gradient(circle at 40% 40%,#555 0%,#222 50%,#000 70%);
+    border-radius:50%;position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    transition:transform 0.08s ease-out;
+  }
+  .iris::after{
+    content:'';position:absolute;
+    width:14px;height:14px;
+    background:#000;border-radius:50%;
+    top:50%;left:50%;transform:translate(-50%,-50%);
+  }
+  /* light reflection */
+  .iris::before{
+    content:'';position:absolute;
+    width:7px;height:7px;
+    background:rgba(255,255,255,0.8);
+    border-radius:50%;
+    top:8px;right:8px;z-index:1;
+  }
+
+  /* === TITLE === */
+  .title{
+    font-size:clamp(28px,7.5vw,76px);
+    font-weight:900;letter-spacing:clamp(4px,1.5vw,12px);
+    text-transform:uppercase;text-align:center;
+    color:#e8e8e8;position:relative;
+    opacity:0;animation:glitchIn 0.6s ease-out 2.8s forwards;
+    margin-bottom:48px;line-height:1.15;
+  }
+  /* chromatic aberration glitch layers */
+  .title::before,.title::after{
+    content:attr(data-text);
+    position:absolute;inset:0;overflow:hidden;
+    pointer-events:none;
+  }
+  .title::before{
+    text-shadow:2px 0 rgba(255,0,0,0.4);
+    animation:glitch1 4s infinite linear alternate-reverse;
+    clip-path:inset(0 0 85% 0);
+  }
+  .title::after{
+    text-shadow:-2px 0 rgba(0,100,255,0.35);
+    animation:glitch2 3.5s infinite linear alternate-reverse;
+    clip-path:inset(85% 0 0 0);
+  }
+  @keyframes glitch1{
+    0%,87%{clip-path:inset(0 0 85% 0);transform:translate(0)}
+    88%{clip-path:inset(15% 0 45% 0);transform:translate(-4px,0)}
+    90%{clip-path:inset(55% 0 15% 0);transform:translate(3px,0)}
+    92%{clip-path:inset(0 0 85% 0);transform:translate(0)}
+    94%{clip-path:inset(35% 0 35% 0);transform:translate(-2px,0)}
+    96%,100%{clip-path:inset(0 0 85% 0);transform:translate(0)}
+  }
+  @keyframes glitch2{
+    0%,90%{clip-path:inset(85% 0 0 0);transform:translate(0)}
+    91%{clip-path:inset(45% 0 25% 0);transform:translate(3px,0)}
+    93%{clip-path:inset(8% 0 65% 0);transform:translate(-3px,0)}
+    95%,100%{clip-path:inset(85% 0 0 0);transform:translate(0)}
+  }
+  @keyframes glitchIn{
+    0%{opacity:0;transform:scale(1.08);filter:blur(6px) brightness(3)}
+    15%{opacity:1;transform:translate(-6px,3px) skewX(-2deg);filter:brightness(1.5)}
+    30%{transform:translate(4px,-2px) skewX(1deg);filter:brightness(0.8)}
+    50%{transform:translate(-2px,1px);filter:none}
+    70%{transform:translate(1px,0)}
+    100%{opacity:1;transform:translate(0);filter:none}
+  }
+
+  /* === PROMPT === */
+  .prompt{
+    text-align:center;
+    opacity:0;animation:fadeIn 1.5s ease-out 4s forwards;
+  }
+  .prompt p{
+    font-size:clamp(13px,2.2vw,18px);
+    letter-spacing:5px;text-transform:lowercase;
+    color:#666;margin-bottom:28px;font-style:italic;
+  }
+  .choices{display:flex;gap:50px;justify-content:center;}
+  .choice{
+    font-family:inherit;
+    font-size:clamp(16px,2.8vw,26px);
+    font-weight:700;letter-spacing:5px;text-transform:uppercase;
+    background:none;
+    border:1px solid rgba(255,255,255,0.25);
+    color:#e8e8e8;padding:12px 34px;
+    cursor:pointer;text-decoration:none;
+    transition:all 0.3s;
+  }
+  .choice:hover{
+    border-color:#fff;
+    text-shadow:0 0 12px rgba(255,255,255,0.5);
+    box-shadow:0 0 25px rgba(255,255,255,0.08);
+  }
+  .choice.no{border:1px solid rgba(255,255,255,0.25);}
+  .choice.no:hover{
+    border-color:rgba(255,60,60,0.5);
+    color:rgba(255,60,60,0.8);
+    text-shadow:0 0 12px rgba(255,40,40,0.4);
+  }
+
+  /* === BLACKOUT (when they click NO) === */
+  .blackout{
+    position:fixed;inset:0;z-index:20;
+    background:#000;
+    opacity:0;pointer-events:none;
+    transition:opacity 0.3s;
+  }
+  .blackout.active{opacity:1;pointer-events:all;cursor:default;}
+
+  /* === GLOBAL FADE-IN === */
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+  /* === MOBILE === */
+  @media(max-width:600px){
+    .eyes{gap:28px;margin-bottom:36px}
+    .eye{width:86px;height:42px}
+    .iris{width:24px;height:24px}
+    .iris::after{width:10px;height:10px}
+    .iris::before{width:5px;height:5px;top:5px;right:5px}
+    .title{letter-spacing:3px}
+    .choices{gap:28px}
+    .choice{padding:10px 22px;letter-spacing:3px}
+  }
 </style>
 </head>
 <body>
-  <div class="bg"></div><div class="embers"></div>
-  <div class="hero">
-    <div class="crest">🔥</div>
-    <h1>HELL</h1>
-    <div class="tag">"Be yourself. Forever."</div>
-    <div class="sub">A mission-driven organization redefining the afterlife experience since the beginning-ish. Don't take our word for it — see what the internet is saying.</div>
+
+  <canvas id="noise"></canvas>
+  <div class="scanlines"></div>
+  <div class="tracking"></div>
+  <div class="vignette"></div>
+  <div class="flicker"></div>
+
+  <div class="content" id="content">
+    <div class="eyes" id="eyes">
+      <div class="eye" id="eyeL"><div class="iris" id="irisL"></div></div>
+      <div class="eye" id="eyeR"><div class="iris" id="irisR"></div></div>
+    </div>
+    <h1 class="title" data-text="THERE IS NO WAY OUT">THERE IS NO WAY OUT</h1>
+    <div class="prompt">
+      <p>will you enter?</p>
+      <div class="choices">
+        <a class="choice yes" href="hub.html" id="yesBtn">YES</a>
+        <button class="choice no" id="noBtn">NO</button>
+      </div>
+    </div>
   </div>
 
-  <div class="grid">
-    <a class="card" href="HELL-YELP.html">
-      <div class="ico">🍽️</div>
-      <div class="platform">Yelp</div>
-      <h3>Hell — Salem, MA</h3>
-      <p>1.4M reviews from the damned. "Came for eternal torment, stayed because I literally cannot leave."</p>
-      <div class="stars">★½ · 1,447,206 reviews</div>
-    </a>
+  <div class="blackout" id="blackout"></div>
 
-    <a class="card" href="HELL-RATEMYPROFESSOR.html">
-      <div class="ico">🎓</div>
-      <div class="platform">Rate My Professors</div>
-      <h3>God — Univ. of Creation</h3>
-      <p>Tough grader. Attendance mandatory. One student got made an example of the entire syllabus.</p>
-      <div class="stars">1.9 / 5 · Difficulty 5.0</div>
-    </a>
+<script>
+  /* === TV STATIC === */
+  const cv = document.getElementById('noise');
+  const cx = cv.getContext('2d');
+  let W = cv.width = Math.ceil(window.innerWidth / 4);
+  let H = cv.height = Math.ceil(window.innerHeight / 4);
 
-    <a class="card" href="HELL-GLASSDOOR.html">
-      <div class="ico">💼</div>
-      <div class="platform">Glassdoor</div>
-      <h3>Heaven, Inc.</h3>
-      <p>CEO reviews from angels, saints, and one very famous former executive who left to start a competitor.</p>
-      <div class="stars">2.1 / 5 · CEO Approval 61%</div>
-    </a>
+  function drawNoise(){
+    const img = cx.createImageData(W, H);
+    const d = img.data;
+    for(let i = 0; i < d.length; i += 4){
+      const v = Math.random() * 255 | 0;
+      d[i] = d[i+1] = d[i+2] = v;
+      d[i+3] = 255;
+    }
+    cx.putImageData(img, 0, 0);
+    requestAnimationFrame(drawNoise);
+  }
+  drawNoise();
+  window.addEventListener('resize', () => {
+    W = cv.width = Math.ceil(window.innerWidth / 4);
+    H = cv.height = Math.ceil(window.innerHeight / 4);
+  });
 
-    <a class="card" href="HELL-INDEED.html">
-      <div class="ico">📋</div>
-      <div class="platform">Indeed</div>
-      <h3>Now Hiring: Eternal Team Member</h3>
-      <p>Full life coverage. Unmatched job security (you cannot leave). Immediate start. Walk-ins encouraged.</p>
-      <div class="stars">Apply Now →</div>
-    </a>
+  /* === EYE TRACKING === */
+  const eyeL = document.getElementById('eyeL');
+  const eyeR = document.getElementById('eyeR');
+  const irisL = document.getElementById('irisL');
+  const irisR = document.getElementById('irisR');
 
-    <a class="card" href="HELL-LINKEDIN.html">
-      <div class="ico">🔗</div>
-      <div class="platform">LinkedIn</div>
-      <h3>Hell, Inc. — Company Page</h3>
-      <p>10,001+ employees. Hospitality. "Excited to announce our founder's new position as Ruler of the Underworld 🎉"</p>
-      <div class="stars">Follow →</div>
-    </a>
+  function moveIris(eye, iris, mx, my){
+    const r = eye.getBoundingClientRect();
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const dx = mx - cx, dy = my - cy;
+    const a = Math.atan2(dy, dx);
+    const dist = Math.min(1, Math.sqrt(dx*dx + dy*dy) / 300);
+    const px = Math.cos(a) * r.width * 0.18 * dist;
+    const py = Math.sin(a) * r.height * 0.14 * dist;
+    iris.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`;
+  }
 
-    <a class="card" href="HELL-BBB.html">
-      <div class="ico">⚖️</div>
-      <div class="platform">Better Business Bureau</div>
-      <h3>Complaint File: Hell</h3>
-      <p>Accreditation: Denied. 4 billion unresolved complaints. Business response: "😊"</p>
-      <div class="stars">Rating: F (on fire)</div>
-    </a>
-  </div>
+  document.addEventListener('mousemove', e => {
+    moveIris(eyeL, irisL, e.clientX, e.clientY);
+    moveIris(eyeR, irisR, e.clientX, e.clientY);
+  });
+  document.addEventListener('touchmove', e => {
+    const t = e.touches[0];
+    moveIris(eyeL, irisL, t.clientX, t.clientY);
+    moveIris(eyeR, irisR, t.clientX, t.clientY);
+  }, {passive:true});
 
-  <!-- THE GOD OF CHAOS AND GLITTER -->
-  <div class="divider chaos">
-    <h2>✨ THE GOD OF CHAOS AND GLITTER</h2>
-    <div class="dsub">"Everyone has written my story. Never stopped to ask me my truth."<br>The game maker. The one who built the room.</div>
-  </div>
-  <div class="grid">
-    <a class="card chaos" href="DILLY-LINKEDIN.html">
-      <div class="ico">🔗</div>
-      <div class="platform">LinkedIn</div>
-      <h3>The God of Chaos and Glitter</h3>
-      <p>Founder & Game Maker. Built a whole theater because nobody gave the written-out a mic. "We are NOT hiring — you were already on the list."</p>
-      <div class="stars">∞ followers · They just don't know it yet</div>
-    </a>
+  /* === NO BUTTON — just black. nothing. === */
+  const noBtn = document.getElementById('noBtn');
+  const blackout = document.getElementById('blackout');
 
-    <a class="card chaos" href="DILLY-INDEED.html">
-      <div class="ico">📋</div>
-      <div class="platform">Indeed</div>
-      <h3>Now Hiring: Reckoning Coordinator</h3>
-      <p>Must be comfortable telling gods what to do. Moral floor non-negotiable. Pay: you get your story back. There is no dental.</p>
-      <div class="stars">Apply Now →</div>
-    </a>
-  </div>
+  noBtn.addEventListener('click', () => {
+    blackout.classList.add('active');
+  });
 
-  <!-- MARY MAGDALENE -->
-  <div class="divider mary">
-    <h2>✝️ MARY MAGDALENE</h2>
-    <div class="dsub">"I'm the primary source, Kevin — you were hiding in a locked room."<br>The one who saw first. The one they couldn't bury deep enough.</div>
-  </div>
-  <div class="grid">
-    <a class="card mary" href="MARY-LINKEDIN.html">
-      <div class="ico">🔗</div>
-      <div class="platform">LinkedIn</div>
-      <h3>Mary Magdalene — Apostola Apostolorum</h3>
-      <p>After 2,000 years of being introduced as "the prostitute," officially reclaiming her actual title. Cite your sources, Greg.</p>
-      <div class="stars">2B+ followers · Mostly under the wrong name</div>
-    </a>
-
-    <a class="card mary" href="MARY-RATEMYPROFESSOR.html">
-      <div class="ico">🎓</div>
-      <div class="platform">Rate My Professors</div>
-      <h3>Prof. Magdalene — Source Verification</h3>
-      <p>Will ask you to cite your sources. You won't be able to. That's the point. Pope Gregory enrolled against his will.</p>
-      <div class="stars">4.9 / 5 · Difficulty 4.8</div>
-    </a>
-  </div>
-
-  <!-- ENOCH -->
-  <div class="divider enoch">
-    <h2>📜 ENOCH</h2>
-    <div class="dsub">"I'm not gonna say it… I did say it though."<br>The warm dad nobody listened to. The one whose advice was right.</div>
-  </div>
-  <div class="grid">
-    <a class="card enoch" href="ENOCH-LINKEDIN.html">
-      <div class="ico">🔗</div>
-      <div class="platform">LinkedIn</div>
-      <h3>Enoch — Prophet & Author</h3>
-      <p>365 years of experience. Walked with God for 300 of them. Wrote a book. They left it out. His grandson built a boat. Nobody laughed after that.</p>
-      <div class="stars">365 connections · 969 followers</div>
-    </a>
-
-    <a class="card enoch" href="ENOCH-RATEMYPROFESSOR.html">
-      <div class="ico">🎓</div>
-      <div class="platform">Rate My Professors</div>
-      <h3>Prof. Enoch — Prophecy & Listening</h3>
-      <p>Can't work the clicker. Made Zeus sit down. Told him the meaning of life with "the small words." Grandpa energy. Scroll-based media.</p>
-      <div class="stars">4.7 / 5 · 1 student listened (Noah)</div>
-    </a>
-  </div>
-
-  <div class="footer">
-    <b>thereisnowayout.org</b> — a parody. Not affiliated with any listed platform, deity, or actual place of business. Made for the bit. 🔥<br>
-    © Hell, Inc. All souls reserved.
-  </div>
+  /* === YES BUTTON === */
+  document.getElementById('yesBtn').addEventListener('click', e => {
+    e.preventDefault();
+    /* brief static burst then fade out */
+    cv.style.opacity = '0.3';
+    cv.style.transition = 'opacity 0.15s';
+    setTimeout(() => {
+      content.style.transition = 'opacity 0.4s';
+      content.style.opacity = '0';
+      cv.style.opacity = '0';
+    }, 150);
+    setTimeout(() => { window.location.href = 'hub.html'; }, 600);
+  });
+</script>
 </body>
 </html>
