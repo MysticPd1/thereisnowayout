@@ -168,6 +168,18 @@
     text-shadow:0 0 12px rgba(255,40,40,0.4);
   }
 
+  /* === SCREEN GLITCH (yes click) === */
+  .glitch-hit{animation:glitchHit 0.4s ease-out}
+  @keyframes glitchHit{
+    0%{transform:translate(0);filter:none}
+    15%{transform:translate(-6px,3px) skewX(-3deg);filter:brightness(2) contrast(2)}
+    30%{transform:translate(5px,-2px) skewX(2deg);filter:invert(1)}
+    45%{transform:translate(-3px,1px);filter:brightness(0.3)}
+    60%{transform:translate(2px,-1px);filter:hue-rotate(180deg)}
+    80%{transform:translate(-1px,0);filter:brightness(1.3)}
+    100%{transform:translate(0);filter:none}
+  }
+
   /* === BLACKOUT (when they click NO) === */
   .blackout{
     position:fixed;inset:0;z-index:20;
@@ -202,7 +214,7 @@
   <div class="content" id="content">
     <h1 class="title" data-text="THERE IS NO WAY OUT">THERE IS NO WAY OUT</h1>
     <div class="prompt">
-      <p>will you enter?</p>
+      <p id="promptText">will you enter?</p>
       <div class="choices">
         <a class="choice yes" href="hub.html" id="yesBtn">YES</a>
         <button class="choice no" id="noBtn">NO</button>
@@ -244,17 +256,49 @@
     blackout.classList.add('active');
   });
 
-  /* === YES BUTTON === */
-  document.getElementById('yesBtn').addEventListener('click', e => {
+  /* === YES BUTTON — escalating confirmation === */
+  const yesBtn = document.getElementById('yesBtn');
+  const promptText = document.getElementById('promptText');
+  const content = document.getElementById('content');
+  let yesCount = 0;
+
+  yesBtn.addEventListener('click', e => {
     e.preventDefault();
-    cv.style.opacity = '0.3';
-    cv.style.transition = 'opacity 0.15s';
+    yesCount++;
+
+    if(yesCount === 1){
+      /* first click: glitch + "are you sure?" */
+      content.classList.remove('glitch-hit');
+      void content.offsetWidth;
+      content.classList.add('glitch-hit');
+      promptText.textContent = '...are you sure?';
+      return;
+    }
+
+    if(yesCount === 2){
+      /* second click: harder glitch + "no going back" */
+      content.classList.remove('glitch-hit');
+      void content.offsetWidth;
+      content.classList.add('glitch-hit');
+      promptText.textContent = 'there is no going back.';
+      return;
+    }
+
+    /* third click: static burst, fade, enter */
+    cv.style.opacity = '0.35';
+    cv.style.transition = 'opacity 0.12s';
+    content.classList.remove('glitch-hit');
+    void content.offsetWidth;
+    content.classList.add('glitch-hit');
     setTimeout(() => {
-      content.style.transition = 'opacity 0.4s';
+      content.style.transition = 'opacity 0.5s';
       content.style.opacity = '0';
+      cv.style.transition = 'opacity 0.4s';
       cv.style.opacity = '0';
-    }, 150);
-    setTimeout(() => { window.location.href = 'hub.html'; }, 600);
+      document.querySelector('.hero-face').style.transition = 'opacity 0.5s';
+      document.querySelector('.hero-face').style.opacity = '0';
+    }, 200);
+    setTimeout(() => { window.location.href = 'hub.html'; }, 800);
   });
 </script>
 </body>
